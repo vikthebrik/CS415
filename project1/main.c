@@ -1,136 +1,146 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <fcntl.h>
+/*
+ * main.c
+ *
+ *  Created on: April 23, 2025
+ *      Author: Vikram Thirumaran
+ */
 
-#include "string_parser.h"
-#include "command.h"
-
-#define MAX_LINE 2048
-#define PROMPT ">>> "
-
-// Trim leading and trailing whitespace
-char *trim_whitespace(char *str) {
-    while (*str == ' ' || *str == '\t') str++;
-    char *end = str + strlen(str) - 1;
-    while (end > str && (*end == ' ' || *end == '\n' || *end == '\t')) {
-        *end = '\0';
-        end--;
-    }
-    return str;
-}
-
-// Executes a single command string (not a full line)
-void execute_command(char *command_str, int file_mode, int out_fd) {
-    command_line *cmd = str_filler(command_str);
-    if (cmd == NULL || cmd->num_token == 0) {
-        free_command_line(cmd);
-        return;
-    }
-
-    char **args = cmd->command_list;
-    int argc = cmd->num_token;
-
-    // Redirect stdout if in file mode
-    int saved_stdout = -1;
-    if (file_mode) {
-        saved_stdout = dup(STDOUT_FILENO);
-        dup2(out_fd, STDOUT_FILENO);
-    } else {
-        write(STDOUT_FILENO, PROMPT, strlen(PROMPT));
-    }
-
-    // Command dispatch
-    if (strcmp(args[0], "ls") == 0 && argc == 1) {
-        listDir();
-    } else if (strcmp(args[0], "pwd") == 0 && argc == 1) {
-        showCurrentDir();
-    } else if (strcmp(args[0], "mkdir") == 0 && argc == 2) {
-        makeDir(args[1]);
-    } else if (strcmp(args[0], "cd") == 0 && argc == 2) {
-        changeDir(args[1]);
-    } else if (strcmp(args[0], "cp") == 0 && argc == 3) {
-        copyFile(args[1], args[2]);
-    } else if (strcmp(args[0], "mv") == 0 && argc == 3) {
-        moveFile(args[1], args[2]);
-    } else if (strcmp(args[0], "rm") == 0 && argc == 2) {
-        deleteFile(args[1]);
-    } else if (strcmp(args[0], "cat") == 0 && argc == 2) {
-        displayFile(args[1]);
-    } else if (strcmp(args[0], "exit") == 0 && argc == 1) {
-        if (file_mode) {
-            dup2(saved_stdout, STDOUT_FILENO);
-            close(out_fd);
-        }
-        free_command_line(cmd);
-        exit(0);
-    } else {
-        write(STDOUT_FILENO, "Error! Unrecognized or invalid command.\n", 40);
-    }
-
-    if (file_mode) {
-        dup2(saved_stdout, STDOUT_FILENO);
-        close(saved_stdout);
-    }
-
-    free_command_line(cmd);
-}
-
-// Main loop
-int main(int argc, char *argv[]) {
-    char *line = NULL;
-    size_t len = 0;
-    ssize_t read;
-
-    int file_mode = 0;
-    FILE *input_stream = stdin;
-    int output_fd = STDOUT_FILENO;
-
-    // File mode setup
-    if (argc == 3 && strcmp(argv[1], "-f") == 0) {
-        file_mode = 1;
-        input_stream = fopen(argv[2], "r");
-        if (!input_stream) {
-            perror("Error opening input file");
-            return 1;
-        }
-
-        output_fd = open("output.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
-        if (output_fd < 0) {
-            perror("Error creating output.txt");
-            fclose(input_stream);
-            return 1;
-        }
-    } else if (argc > 1) {
-        write(STDOUT_FILENO, "Usage: ./pseudo-shell [-f <filename>]\n", 38);
-        return 1;
-    }
-
-    // Shell loop
-    while ((read = getline(&line, &len, input_stream)) != -1) {
-        // Remove newline and skip empty lines
-        if (read == 1) continue;
-
-        // Split by semicolon
-        char *saveptr;
-        char *command = strtok_r(line, ";", &saveptr);
-        while (command) {
-            char *trimmed = trim_whitespace(command);
-            if (strlen(trimmed) > 0)
-                execute_command(trimmed, file_mode, output_fd);
-            command = strtok_r(NULL, ";", &saveptr);
-        }
-
-        if (!file_mode)
-            write(STDOUT_FILENO, "\n", 1);
-    }
-
-    if (file_mode) {
-        fclose(input_stream);
-        close(output_fd);
-    }
-
-    free(line);
-    return 0;
-}
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
+ #include <stdbool.h>
+ #include <unistd.h>
+ #include <time.h>
+ 
+ #include "string_parser.h"
+ #include "command.h"
+ 
+ #define _GNU_SOURCE
+ 
+ FILE *input_stream = NULL;
+ 
+ int main(int argc, char const *argv[]) {
+     // Buffer to hold each line of input
+     size_t buffer_len = 128;
+     char *input_line = malloc(buffer_len);
+ 
+     bool reading_from_file = false;
+ 
+     // Determine input source: stdin or file
+     if (argc == 1) {
+         // Interactive mode
+         write(STDOUT_FILENO, ">>> ", 4);
+         input_stream = stdin;
+     } else if (argc == 3 && strcmp(argv[1], "-f") == 0) {
+         // File mode
+         input_stream = fopen(argv[2], "r");
+         if (input_stream == NULL) {
+             printf("Error: File does not exist\n");
+             return -1;
+         }
+         freopen("output.txt", "w", stdout);
+         reading_from_file = true;
+     } else {
+         // Invalid usage
+         printf("Error: Invalid input\n");
+         return -1;
+     }
+ 
+     command_line semicolon_tokens;
+     command_line space_tokens;
+ 
+     // Read input line by line
+     while (getline(&input_line, &buffer_len, input_stream) != -1) {
+         // Exit command in interactive mode
+         if (strcmp(input_line, "exit\n") == 0) {
+             break;
+         }
+ 
+         // Tokenize by ';' to get individual commands
+         semicolon_tokens = str_filler(input_line, ";");
+ 
+         for (int i = 0; i < semicolon_tokens.num_token; i++) {
+             // Tokenize each command by spaces
+             space_tokens = str_filler(semicolon_tokens.command_list[i], " ");
+ 
+             // Only check the first token, as commands are single-word identifiers
+             char *command = space_tokens.command_list[0];
+ 
+             // Command dispatcher with argument count validation
+             if (strcmp(command, "ls") == 0) {
+                 if (space_tokens.num_token == 1) {
+                     listDir();
+                 } else {
+                     printf("Error: Unsupported parameters for command: ls\n");
+                 }
+             } else if (strcmp(command, "pwd") == 0) {
+                 if (space_tokens.num_token == 1) {
+                     showCurrentDir();
+                 } else {
+                     printf("Error: Unsupported parameters for command: pwd\n");
+                 }
+             } else if (strcmp(command, "mkdir") == 0) {
+                 if (space_tokens.num_token == 2) {
+                     makeDir(space_tokens.command_list[1]);
+                 } else {
+                     printf("Error: Unsupported parameters for command: mkdir\n");
+                 }
+             } else if (strcmp(command, "cd") == 0) {
+                 if (space_tokens.num_token == 2) {
+                     changeDir(space_tokens.command_list[1]);
+                 } else {
+                     printf("Error: Unsupported parameters for command: cd\n");
+                 }
+             } else if (strcmp(command, "cp") == 0) {
+                 if (space_tokens.num_token == 3) {
+                     copyFile(space_tokens.command_list[1], space_tokens.command_list[2]);
+                 } else {
+                     printf("Error: Unsupported parameters for command: cp\n");
+                 }
+             } else if (strcmp(command, "mv") == 0) {
+                 if (space_tokens.num_token == 3) {
+                     moveFile(space_tokens.command_list[1], space_tokens.command_list[2]);
+                 } else {
+                     printf("Error: Unsupported parameters for command: mv\n");
+                 }
+             } else if (strcmp(command, "rm") == 0) {
+                 if (space_tokens.num_token == 2) {
+                     deleteFile(space_tokens.command_list[1]);
+                 } else {
+                     printf("Error: Unsupported parameters for command: rm\n");
+                 }
+             } else if (strcmp(command, "cat") == 0) {
+                 if (space_tokens.num_token == 2) {
+                     displayFile(space_tokens.command_list[1]);
+                     printf("\n");
+                 } else {
+                     printf("Error: Unsupported parameters for command: cat\n");
+                 }
+             } else {
+                 printf("Error: Invalid command\n");
+             }
+ 
+             // Free tokens from the space-separated parsing
+             free_command_line(&space_tokens);
+             memset(&space_tokens, 0, sizeof(command_line));
+         }
+ 
+         // Prompt for next command if in interactive mode
+         if (input_stream == stdin) {
+             write(STDOUT_FILENO, ">>> ", 4);
+         }
+ 
+         // Free tokens from the semicolon-separated parsing
+         free_command_line(&semicolon_tokens);
+         memset(&semicolon_tokens, 0, sizeof(command_line));
+     }
+ 
+     // Cleanup: close file stream if necessary and free line buffer
+     if (reading_from_file) {
+         fclose(input_stream);
+     }
+ 
+     free(input_line);
+     return 0;
+ }
+ 
