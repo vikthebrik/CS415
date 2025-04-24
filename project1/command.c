@@ -107,6 +107,9 @@ void copyFile(char *sourcePath, char *destinationPath){
             break;
         }
     }
+    close(src_fd);
+    close(dst_fd);
+    free(Dest);
 } 
 
 // mv
