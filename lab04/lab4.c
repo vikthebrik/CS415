@@ -8,11 +8,6 @@ void script_print (pid_t* pid_ary, int size);
 
 int main(int argc,char*argv[])
 {
-	if (argc != 2)
-	{
-		printf ("Wrong number of arguments\n");
-		exit (0);
-	}
 
 	/*
 	*	TODO
@@ -25,7 +20,46 @@ int main(int argc,char*argv[])
 	*	#5	free any dynamic memory
 	*/
 
-	return 0;
+	if (argc != 2) {
+        printf("Usage: %s <num_processes>\n", argv[0]);
+        exit(1);
+    }
+
+    int n = atoi(argv[1]);
+    pid_t* pid_array = malloc(n * sizeof(pid_t));
+    if (pid_array == NULL) {
+        perror("malloc");
+        exit(1);
+    }
+
+    for (int i = 0; i < n; i++) {
+        pid_t pid = fork();
+        if (pid < 0) {
+            perror("fork");
+            exit(1);
+        } else if (pid == 0) {
+            // Child process
+            char* args[] = {"./iobound", "-seconds", "5", NULL};
+            if (execvp(args[0], args) == -1) {
+                perror("execvp failed");
+                exit(1);
+            }
+        } else {
+            // Parent stores child PID
+            pid_array[i] = pid;
+        }
+    }
+
+    // Create monitoring script and launch it
+    script_print(pid_array, n);
+
+    // Wait for all child processes to finish
+    for (int i = 0; i < n; i++) {
+        waitpid(pid_array[i], NULL, 0);
+    }
+
+    free(pid_array);
+    return 0;
 }
 
 
