@@ -1,0 +1,103 @@
+==2652000== Memcheck, a memory error detector
+==2652000== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2652000== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==2652000== Command: ./part3 -f input.txt
+==2652000== 
+total 1600
+  7 string_parser.o
+  7 string_parser.h
+  7 string_parser.c
+  1 random.c
+164 part5output2.png
+204 part5output1.png
+ 12 part5.o
+  7 part5.c
+ 18 part5
+239 part4output2.png
+233 part4output1.png
+ 12 part4.o
+  7 part4.c
+ 18 part4
+257 part3output.png
+ 12 part3.o
+  7 part3.c
+ 12 part3
+111 part2output.png
+ 12 part2.o
+  7 part2.c
+ 12 part2
+100 part1_output.png
+ 12 part1.o
+  7 part1.c
+ 12 part1
+  1 output.txt
+  7 Makefile
+  7 log*.txt
+  7 log5.txt
+  7 log4.txt
+  7 log3.txt
+  7 log2.txt
+  7 log1.txt
+  7 iobound.c
+  7 iobound
+  1 input.txt
+ 12 ghost-shell
+  7 cpubound.c
+  7 cpubound
+ 12 ..
+ 12 .
+Error, invalid command.
+==2652952== 
+==2652952== HEAP SUMMARY:
+==2652952==     in use at exit: 0 bytes in 0 blocks
+==2652952==   total heap usage: 30 allocs, 30 frees, 25,940 bytes allocated
+==2652952== 
+==2652952== All heap blocks were freed -- no leaks are possible
+==2652952== 
+==2652952== For lists of detected and suppressed errors, rerun with: -s
+==2652952== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+ls -a -r -s
+sleep 1
+invalid name
+./iobound -seconds 10
+./cpubound -seconds 10
+cat input.txthere!Process: 2652953 - Begining to write to file.
+Process: 2652953 - Finished.
+Process: 2652954 - Begining calculation.
+Process: 2652954 - Finished.
+Scheduling process 2652950
+Scheduling process 2652951
+Scheduling process 2652952
+Scheduling process 2652953
+Scheduling process 2652954
+Scheduling process 2652955
+Scheduling process 2652951
+Scheduling process 2652953
+Scheduling process 2652954
+Scheduling process 2652953
+Scheduling process 2652954
+Scheduling process 2652953
+Scheduling process 2652954
+Scheduling process 2652953
+Scheduling process 2652954
+Scheduling process 2652953
+Scheduling process 2652954
+Scheduling process 2652953
+Scheduling process 2652954
+Scheduling process 2652953
+Scheduling process 2652954
+Scheduling process 2652953
+Scheduling process 2652954
+Scheduling process 2652953
+Scheduling process 2652954
+Scheduling process 2652953
+Scheduling process 2652954
+==2652000== 
+==2652000== HEAP SUMMARY:
+==2652000==     in use at exit: 0 bytes in 0 blocks
+==2652000==   total heap usage: 53 allocs, 53 frees, 26,312 bytes allocated
+==2652000== 
+==2652000== All heap blocks were freed -- no leaks are possible
+==2652000== 
+==2652000== For lists of detected and suppressed errors, rerun with: -s
+==2652000== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

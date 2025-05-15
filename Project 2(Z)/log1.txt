@@ -1,0 +1,72 @@
+==2622782== Memcheck, a memory error detector
+==2622782== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2622782== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==2622782== Command: ./part1 -f input.txt
+==2622782== 
+total 1574
+  7 string_parser.o
+  7 string_parser.h
+  7 string_parser.c
+  1 random.c
+164 part5output2.png
+204 part5output1.png
+ 12 part5.o
+  7 part5.c
+ 18 part5
+239 part4output2.png
+233 part4output1.png
+ 12 part4.o
+  7 part4.c
+ 18 part4
+257 part3output.png
+ 12 part3.o
+  7 part3.c
+ 12 part3
+111 part2output.png
+ 12 part2.o
+  7 part2.c
+ 12 part2
+100 part1_output.png
+ 12 part1.o
+  7 part1.c
+ 12 part1
+  1 output.txt
+  7 Makefile
+  7 log*.txt
+  7 log1.txt
+  7 iobound.c
+  7 iobound
+  1 input.txt
+ 12 ghost-shell
+  7 cpubound.c
+  7 cpubound
+ 12 ..
+ 12 .
+Error, invalid command.
+ls -a -r -s
+sleep 1
+invalid name
+./iobound -seconds 10
+./cpubound -seconds 10
+cat input.txt==2622785== 
+==2622785== HEAP SUMMARY:
+==2622785==     in use at exit: 0 bytes in 0 blocks
+==2622785==   total heap usage: 30 allocs, 30 frees, 25,940 bytes allocated
+==2622785== 
+==2622785== All heap blocks were freed -- no leaks are possible
+==2622785== 
+==2622785== For lists of detected and suppressed errors, rerun with: -s
+==2622785== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+here!Process: 2622786 - Begining to write to file.
+Process: 2622786 - Finished.
+Process: 2622787 - Begining calculation.
+Process: 2622787 - Finished.
+==2622782== 
+==2622782== HEAP SUMMARY:
+==2622782==     in use at exit: 0 bytes in 0 blocks
+==2622782==   total heap usage: 52 allocs, 52 frees, 18,120 bytes allocated
+==2622782== 
+==2622782== All heap blocks were freed -- no leaks are possible
+==2622782== 
+==2622782== For lists of detected and suppressed errors, rerun with: -s
+==2622782== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

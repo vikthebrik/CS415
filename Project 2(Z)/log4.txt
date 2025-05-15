@@ -1,0 +1,167 @@
+==2635441== Memcheck, a memory error detector
+==2635441== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2635441== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==2635441== Command: ./part4 -f input.txt
+==2635441== 
+total 1587
+  7 string_parser.o
+  7 string_parser.h
+  7 string_parser.c
+  1 random.c
+164 part5output2.png
+204 part5output1.png
+ 12 part5.o
+  7 part5.c
+ 18 part5
+239 part4output2.png
+233 part4output1.png
+ 12 part4.o
+  7 part4.c
+ 18 part4
+257 part3output.png
+ 12 part3.o
+  7 part3.c
+ 12 part3
+111 part2output.png
+ 12 part2.o
+  7 part2.c
+ 12 part2
+100 part1_output.png
+ 12 part1.o
+  7 part1.c
+ 12 part1
+  1 output.txt
+  7 Makefile
+  7 log*.txt
+  1 log4.txt
+  7 log3.txt
+  7 log2.txt
+  7 log1.txt
+  7 iobound.c
+  7 iobound
+  1 input.txt
+ 12 ghost-shell
+  7 cpubound.c
+  7 cpubound
+ 12 ..
+ 12 .
+Error, invalid command.
+==2635444== 
+==2635444== HEAP SUMMARY:
+==2635444==     in use at exit: 0 bytes in 0 blocks
+==2635444==   total heap usage: 30 allocs, 30 frees, 25,940 bytes allocated
+==2635444== 
+==2635444== All heap blocks were freed -- no leaks are possible
+==2635444== 
+==2635444== For lists of detected and suppressed errors, rerun with: -s
+==2635444== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+ls -a -r -s
+sleep 1
+invalid name
+./iobound -seconds 10
+./cpubound -seconds 10
+cat input.txthere!Process: 2635445 - Begining to write to file.
+Process: 2635445 - Finished.
+Process: 2635446 - Begining calculation.
+Process: 2635446 - Finished.
+PID - utime     stime       time     nice    virt mem
+2635442  0.000000  0.000000    0.000000 0       94486528 
+2635443  0.000000  0.000000    0.000000 0       94486528 
+2635444  0.000000  0.000000    0.000000 0       94486528 
+2635445  0.000000  0.000000    0.000000 0       94486528 
+2635446  0.000000  0.000000    0.000000 0       94486528 
+2635447  0.000000  0.000000    0.000000 0       94486528 
+PID - utime     stime       time     nice    virt mem
+2635443  0.000000  0.000000    0.000000 0       94486528 
+2635444  0.000000  0.000000    0.000000 0       94486528 
+2635445  0.000000  0.000000    0.000000 0       94486528 
+2635446  0.000000  0.000000    0.000000 0       94486528 
+2635447  0.000000  0.000000    0.000000 0       94486528 
+PID - utime     stime       time     nice    virt mem
+2635443  0.000000  0.000000    0.000000 0       5910528 
+2635444  0.000000  0.000000    0.000000 0       94486528 
+2635445  0.000000  0.000000    0.000000 0       94486528 
+2635446  0.000000  0.000000    0.000000 0       94486528 
+2635447  0.000000  0.000000    0.000000 0       94486528 
+PID - utime     stime       time     nice    virt mem
+2635443  0.000000  0.000000    0.000000 0       5910528 
+2635445  0.000000  0.000000    0.000000 0       94486528 
+2635446  0.000000  0.000000    0.000000 0       94486528 
+2635447  0.000000  0.000000    0.000000 0       94486528 
+PID - utime     stime       time     nice    virt mem
+2635443  0.000000  0.000000    0.000000 0       5910528 
+2635445  0.850000  0.140000    0.990000 0       2842624 
+2635446  0.000000  0.000000    0.000000 0       94486528 
+2635447  0.000000  0.000000    0.000000 0       94486528 
+PID - utime     stime       time     nice    virt mem
+2635443  0.000000  0.000000    0.000000 0       5910528 
+2635445  0.870000  0.140000    1.010000 0       2842624 
+2635446  0.550000  0.450000    1.000000 0       2842624 
+2635447  0.000000  0.000000    0.000000 0       94486528 
+PID - utime     stime       time     nice    virt mem
+2635443  0.000000  0.000000    0.000000 0       5910528 
+2635445  0.870000  0.140000    1.010000 0       2842624 
+2635446  0.550000  0.450000    1.000000 0       2842624 
+PID - utime     stime       time     nice    virt mem
+2635445  0.870000  0.140000    1.010000 0       2842624 
+2635446  0.550000  0.450000    1.000000 0       2842624 
+PID - utime     stime       time     nice    virt mem
+2635445  1.720000  0.290000    2.010000 0       2842624 
+2635446  0.550000  0.450000    1.000000 0       2842624 
+PID - utime     stime       time     nice    virt mem
+2635445  1.720000  0.290000    2.010000 0       2842624 
+2635446  1.140000  0.870000    2.010000 0       2842624 
+PID - utime     stime       time     nice    virt mem
+2635445  2.590000  0.430000    3.020000 0       2842624 
+2635446  1.140000  0.870000    2.010000 0       2842624 
+PID - utime     stime       time     nice    virt mem
+2635445  2.590000  0.430000    3.020000 0       2842624 
+2635446  1.690000  1.320000    3.010000 0       2842624 
+PID - utime     stime       time     nice    virt mem
+2635445  3.440000  0.570000    4.010000 0       2842624 
+2635446  1.690000  1.320000    3.010000 0       2842624 
+PID - utime     stime       time     nice    virt mem
+2635445  3.440000  0.570000    4.010000 0       2842624 
+2635446  2.240000  1.770000    4.010000 0       2842624 
+PID - utime     stime       time     nice    virt mem
+2635445  4.290000  0.730000    5.020000 0       2842624 
+2635446  2.240000  1.770000    4.010000 0       2842624 
+PID - utime     stime       time     nice    virt mem
+2635445  4.290000  0.730000    5.020000 0       2842624 
+2635446  2.820000  2.190000    5.010000 0       2842624 
+PID - utime     stime       time     nice    virt mem
+2635445  5.190000  0.830000    6.020000 0       2842624 
+2635446  2.820000  2.190000    5.010000 0       2842624 
+PID - utime     stime       time     nice    virt mem
+2635445  5.190000  0.830000    6.020000 0       2842624 
+2635446  3.370000  2.640000    6.010000 0       2842624 
+PID - utime     stime       time     nice    virt mem
+2635445  6.050000  0.970000    7.020000 0       2842624 
+2635446  3.370000  2.650000    6.020000 0       2842624 
+PID - utime     stime       time     nice    virt mem
+2635445  6.050000  0.980000    7.030000 0       2842624 
+2635446  3.910000  3.110000    7.020000 0       2842624 
+PID - utime     stime       time     nice    virt mem
+2635445  6.910000  1.120000    8.030000 0       2842624 
+2635446  3.910000  3.110000    7.020000 0       2842624 
+PID - utime     stime       time     nice    virt mem
+2635445  6.910000  1.120000    8.030000 0       2842624 
+2635446  4.470000  3.550000    8.020000 0       2842624 
+PID - utime     stime       time     nice    virt mem
+2635445  7.770000  1.260000    9.030000 0       2842624 
+2635446  4.470000  3.550000    8.020000 0       2842624 
+PID - utime     stime       time     nice    virt mem
+2635445  7.780000  1.260000    9.040000 0       2842624 
+2635446  5.010000  4.020000    9.030000 0       2842624 
+PID - utime     stime       time     nice    virt mem
+2635446  5.010000  4.020000    9.030000 0       2842624 
+Program executed in 0.197972 seconds.
+==2635441== 
+==2635441== HEAP SUMMARY:
+==2635441==     in use at exit: 0 bytes in 0 blocks
+==2635441==   total heap usage: 3,749 allocs, 3,749 frees, 197,650 bytes allocated
+==2635441== 
+==2635441== All heap blocks were freed -- no leaks are possible
+==2635441== 
+==2635441== For lists of detected and suppressed errors, rerun with: -s
+==2635441== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
