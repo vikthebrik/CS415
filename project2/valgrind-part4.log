@@ -1,0 +1,120 @@
+==2869708== Memcheck, a memory error detector
+==2869708== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2869708== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==2869708== Command: ./part4 -f input.txt
+==2869708== 
+total 1544
+  7 valgrind_log4.txt
+  7 valgrind_log3.txt
+  7 valgrind_log2.txt
+  7 valgrind_log1.txt
+  7 string_parser.o
+  7 string_parser.h
+  7 string_parser.c
+  1 random.c
+164 part5output2.png
+204 part5output1.png
+ 12 part5.o
+  7 part5.c
+ 18 part5
+239 part4output2.png
+233 part4output1.png
+ 12 part4.o
+  7 part4.c
+ 18 part4
+257 part3output.png
+ 12 part3.o
+  7 part3.c
+ 12 part3
+111 part2output.png
+ 12 part2.o
+  7 part2.c
+ 12 part2
+ 12 part1.o
+ 82 part1_compiled.png
+  7 part1.c
+ 12 part1
+  7 Makefile
+  7 iobound
+  1 input.txt
+  7 cpubound
+ 12 ..
+ 12 .
+Error, invalid command.
+==2869711== 
+==2869711== HEAP SUMMARY:
+==2869711==     in use at exit: 0 bytes in 0 blocks
+==2869711==   total heap usage: 30 allocs, 30 frees, 25,940 bytes allocated
+==2869711== 
+==2869711== All heap blocks were freed -- no leaks are possible
+==2869711== 
+==2869711== For lists of detected and suppressed errors, rerun with: -s
+==2869711== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+Error, invalid command.
+==2869714== 
+==2869714== HEAP SUMMARY:
+==2869714==     in use at exit: 0 bytes in 0 blocks
+==2869714==   total heap usage: 38 allocs, 38 frees, 26,076 bytes allocated
+==2869714== 
+==2869714== All heap blocks were freed -- no leaks are possible
+==2869714== 
+==2869714== For lists of detected and suppressed errors, rerun with: -s
+==2869714== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+Error, invalid command.
+==2869717== 
+==2869717== HEAP SUMMARY:
+==2869717==     in use at exit: 0 bytes in 0 blocks
+==2869717==   total heap usage: 46 allocs, 46 frees, 26,216 bytes allocated
+==2869717== 
+==2869717== All heap blocks were freed -- no leaks are possible
+==2869717== 
+==2869717== For lists of detected and suppressed errors, rerun with: -s
+==2869717== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+ls -a -r -s
+sleep 1
+invalid name
+./iobound -seconds 10
+./cpubound -seconds 10
+cat input.txtPID - utime     stime       time     nice    virt mem
+2869709  0.000000  0.000000    0.000000 0       94486528 
+2869710  0.000000  0.000000    0.000000 0       94486528 
+2869711  0.000000  0.000000    0.000000 0       94486528 
+2869714  0.000000  0.000000    0.000000 0       94486528 
+2869717  0.000000  0.000000    0.000000 0       94486528 
+2869718  0.000000  0.000000    0.000000 0       94486528 
+PID - utime     stime       time     nice    virt mem
+2869710  0.000000  0.000000    0.000000 0       94486528 
+2869711  0.000000  0.000000    0.000000 0       94486528 
+2869714  0.000000  0.000000    0.000000 0       94486528 
+2869717  0.000000  0.000000    0.000000 0       94486528 
+2869718  0.000000  0.000000    0.000000 0       94486528 
+PID - utime     stime       time     nice    virt mem
+2869710  0.000000  0.000000    0.000000 0       5910528 
+2869711  0.000000  0.000000    0.000000 0       94486528 
+2869714  0.000000  0.000000    0.000000 0       94486528 
+2869717  0.000000  0.000000    0.000000 0       94486528 
+2869718  0.000000  0.000000    0.000000 0       94486528 
+PID - utime     stime       time     nice    virt mem
+2869710  0.000000  0.000000    0.000000 0       5910528 
+2869714  0.000000  0.000000    0.000000 0       94486528 
+2869717  0.000000  0.000000    0.000000 0       94486528 
+2869718  0.000000  0.000000    0.000000 0       94486528 
+PID - utime     stime       time     nice    virt mem
+2869710  0.000000  0.000000    0.000000 0       5910528 
+2869717  0.000000  0.000000    0.000000 0       94486528 
+2869718  0.000000  0.000000    0.000000 0       94486528 
+PID - utime     stime       time     nice    virt mem
+2869710  0.000000  0.000000    0.000000 0       5910528 
+2869718  0.000000  0.000000    0.000000 0       94486528 
+PID - utime     stime       time     nice    virt mem
+2869710  0.000000  0.000000    0.000000 0       5910528 
+Program executed in 0.132831 seconds.
+==2869708== 
+==2869708== HEAP SUMMARY:
+==2869708==     in use at exit: 0 bytes in 0 blocks
+==2869708==   total heap usage: 1,509 allocs, 1,509 frees, 93,516 bytes allocated
+==2869708== 
+==2869708== All heap blocks were freed -- no leaks are possible
+==2869708== 
+==2869708== For lists of detected and suppressed errors, rerun with: -s
+==2869708== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

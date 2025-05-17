@@ -1,0 +1,84 @@
+==2866432== Memcheck, a memory error detector
+==2866432== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2866432== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==2866432== Command: ./part2 -f input.txt
+==2866432== 
+ls -a -r -s
+sleep 1
+invalid name
+./iobound -seconds 10
+./cpubound -seconds 10
+cat input.txttotal 1525
+  1 valgrind_log2.txt
+  7 valgrind_log1.txt
+  7 string_parser.o
+  7 string_parser.h
+  7 string_parser.c
+  1 random.c
+164 part5output2.png
+204 part5output1.png
+ 12 part5.o
+  7 part5.c
+ 18 part5
+239 part4output2.png
+233 part4output1.png
+ 12 part4.o
+  7 part4.c
+ 18 part4
+257 part3output.png
+ 12 part3.o
+  7 part3.c
+ 12 part3
+111 part2output.png
+ 12 part2.o
+  7 part2.c
+ 12 part2
+ 12 part1.o
+ 82 part1_compiled.png
+  7 part1.c
+ 12 part1
+  7 Makefile
+  7 iobound
+  1 input.txt
+  7 cpubound
+ 12 ..
+ 12 .
+Error, invalid command.
+Error, invalid command.
+Error, invalid command.
+==2866437== 
+==2866437== HEAP SUMMARY:
+==2866437==     in use at exit: 0 bytes in 0 blocks
+==2866437==   total heap usage: 46 allocs, 46 frees, 26,216 bytes allocated
+==2866437== 
+==2866437== All heap blocks were freed -- no leaks are possible
+==2866437== 
+==2866437== For lists of detected and suppressed errors, rerun with: -s
+==2866437== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==2866435== 
+==2866435== HEAP SUMMARY:
+==2866435==     in use at exit: 0 bytes in 0 blocks
+==2866435==   total heap usage: 30 allocs, 30 frees, 25,940 bytes allocated
+==2866435== 
+==2866435== All heap blocks were freed -- no leaks are possible
+==2866435== 
+==2866435== For lists of detected and suppressed errors, rerun with: -s
+==2866435== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==2866436== 
+==2866436== HEAP SUMMARY:
+==2866436==     in use at exit: 0 bytes in 0 blocks
+==2866436==   total heap usage: 38 allocs, 38 frees, 26,076 bytes allocated
+==2866436== 
+==2866436== All heap blocks were freed -- no leaks are possible
+==2866436== 
+==2866436== For lists of detected and suppressed errors, rerun with: -s
+==2866436== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==2866432== 
+==2866432== HEAP SUMMARY:
+==2866432==     in use at exit: 0 bytes in 0 blocks
+==2866432==   total heap usage: 52 allocs, 52 frees, 18,120 bytes allocated
+==2866432== 
+==2866432== All heap blocks were freed -- no leaks are possible
+==2866432== 
+==2866432== For lists of detected and suppressed errors, rerun with: -s
+==2866432== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
