@@ -1,0 +1,114 @@
+==681302== Memcheck, a memory error detector
+==681302== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==681302== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==681302== Command: ./park -n 20 -c 3 -p 5 -w 10 -r 8
+==681302== 
+===== DUCK PARK SIMULATION (Part 2) =====
+Simulation started with parameters:
+- Number of passengers: 20
+- Number of cars: 3
+- Car capacity: 5
+- Car wait time: 10 seconds
+- Ride duration: 8 seconds
+[Time: 19:33:45] Passenger 10 entered the park
+[Time: 19:33:45] Passenger 10 is exploring for 8 seconds
+[Time: 19:33:45] Passenger 4 entered the park
+[Time: 19:33:45] Passenger 4 is exploring for 10 seconds
+[Time: 19:33:45] Passenger 11 entered the park
+[Time: 19:33:45] Passenger 11 is exploring for 1 seconds
+[Time: 19:33:45] Passenger 1 entered the park
+[Time: 19:33:45] Passenger 1 is exploring for 1 seconds
+[Time: 19:33:45] Passenger 12 entered the park
+[Time: 19:33:45] Passenger 12 is exploring for 1 seconds
+[Time: 19:33:45] Passenger 5 entered the park
+[Time: 19:33:45] Passenger 5 is exploring for 9 seconds
+[Time: 19:33:45] Passenger 13 entered the park
+[Time: 19:33:45] Passenger 13 is exploring for 10 seconds
+[Time: 19:33:45] Car 1 invoked load()
+[Time: 19:33:45] Passenger 14 entered the park
+[Time: 19:33:45] Passenger 14 is exploring for 9 seconds
+[Time: 19:33:45] Passenger 6 entered the park
+[Time: 19:33:45] Passenger 6 is exploring for 5 seconds
+[Time: 19:33:45] Passenger 15 entered the park
+[Time: 19:33:45] Passenger 15 is exploring for 8 seconds
+[Time: 19:33:45] Passenger 16 entered the park
+[Time: 19:33:45] Passenger 16 is exploring for 2 seconds
+[Time: 19:33:45] Passenger 7 entered the park
+[Time: 19:33:45] Passenger 7 is exploring for 8 seconds
+[Time: 19:33:45] Passenger 17 entered the park
+[Time: 19:33:45] Passenger 17 is exploring for 7 seconds
+[Time: 19:33:45] Passenger 2 entered the park
+[Time: 19:33:45] Passenger 2 is exploring for 4 seconds
+[Time: 19:33:45] Passenger 18 entered the park
+[Time: 19:33:45] Passenger 18 is exploring for 5 seconds
+[Time: 19:33:45] Passenger 8 entered the park
+[Time: 19:33:45] Passenger 8 is exploring for 1 seconds
+[Time: 19:33:45] Passenger 19 entered the park
+[Time: 19:33:45] Passenger 19 is exploring for 4 seconds
+[Time: 19:33:45] Passenger 3 entered the park
+[Time: 19:33:45] Passenger 3 is exploring for 6 seconds
+[Time: 19:33:45] Passenger 20 entered the park
+[Time: 19:33:45] Passenger 20 is exploring for 2 seconds
+[Time: 19:33:45] Passenger 9 entered the park
+[Time: 19:33:45] Passenger 9 is exploring for 7 seconds
+[Time: 19:33:46] Passenger 11 is getting a ticket
+[Time: 19:33:46] Passenger 1 is getting a ticket
+[Time: 19:33:46] Passenger 11 boarded Car 1
+[Time: 19:33:46] Passenger 1 boarded Car 1
+[Time: 19:33:46] Passenger 8 is getting a ticket
+[Time: 19:33:46] Passenger 8 boarded Car 1
+[Time: 19:33:46] Passenger 12 is getting a ticket
+[Time: 19:33:46] Passenger 12 boarded Car 1
+[Time: 19:33:47] Passenger 16 is getting a ticket
+[Time: 19:33:47] Passenger 16 boarded Car 1
+[Time: 19:33:47] Car 1 departed with 5 passengers
+[Time: 19:33:47] Passenger 20 is getting a ticket
+[Time: 19:33:49] Passenger 2 is getting a ticket
+[Time: 19:33:49] Passenger 19 is getting a ticket
+[Time: 19:33:50] Passenger 6 is getting a ticket
+[Time: 19:33:50] Passenger 18 is getting a ticket
+[Time: 19:33:51] Passenger 3 is getting a ticket
+[Time: 19:33:52] Passenger 17 is getting a ticket
+[Time: 19:33:52] Passenger 9 is getting a ticket
+[Time: 19:33:53] Passenger 10 is getting a ticket
+[Time: 19:33:53] Passenger 15 is getting a ticket
+[Time: 19:33:53] Passenger 7 is getting a ticket
+[Time: 19:33:54] Passenger 5 is getting a ticket
+[Time: 19:33:54] Passenger 14 is getting a ticket
+[Time: 19:33:55] Passenger 4 is getting a ticket
+[Time: 19:33:55] Passenger 13 is getting a ticket
+[Time: 19:33:55] Car 1 invoked unload()
+[Time: 19:33:55] Car 2 invoked load()
+[Time: 19:33:55] Passenger 20 boarded Car 2
+[Time: 19:33:55] Passenger 2 boarded Car 2
+[Time: 19:33:55] Passenger 19 boarded Car 2
+[Time: 19:33:55] Passenger 6 boarded Car 2
+[Time: 19:33:55] Passenger 18 boarded Car 2
+[Time: 19:33:55] Car 2 departed with 5 passengers
+[Time: 19:34:03] Car 2 invoked unload()
+[Time: 19:34:03] Car 3 invoked load()
+[Time: 19:34:03] Passenger 3 boarded Car 3
+[Time: 19:34:03] Passenger 17 boarded Car 3
+[Time: 19:34:03] Passenger 9 boarded Car 3
+[Time: 19:34:03] Passenger 10 boarded Car 3
+[Time: 19:34:03] Passenger 15 boarded Car 3
+[Time: 19:34:03] Car 3 departed with 5 passengers
+[Time: 19:34:11] Car 3 invoked unload()
+[Time: 19:34:11] Car 1 invoked load()
+[Time: 19:34:11] Passenger 7 boarded Car 1
+[Time: 19:34:11] Passenger 5 boarded Car 1
+[Time: 19:34:11] Passenger 14 boarded Car 1
+[Time: 19:34:11] Passenger 4 boarded Car 1
+[Time: 19:34:11] Passenger 13 boarded Car 1
+[Time: 19:34:11] Car 1 departed with 5 passengers
+[Time: 19:34:19] Car 1 invoked unload()
+Simulation complete. Total passengers served: 20
+==681302== 
+==681302== HEAP SUMMARY:
+==681302==     in use at exit: 0 bytes in 0 blocks
+==681302==   total heap usage: 147 allocs, 147 frees, 21,329 bytes allocated
+==681302== 
+==681302== All heap blocks were freed -- no leaks are possible
+==681302== 
+==681302== For lists of detected and suppressed errors, rerun with: -s
+==681302== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

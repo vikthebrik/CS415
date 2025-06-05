@@ -1,0 +1,127 @@
+==287738== Memcheck, a memory error detector
+==287738== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==287738== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==287738== Command: ./park -n 20 -c 3 -p 5 -w 10 -r 8
+==287738== 
+===== DUCK PARK SIMULATION (Part 3) =====
+Simulation started with parameters:
+- Number of passengers: 20
+- Number of cars: 3
+- Car capacity: 5
+- Car wait time: 10 seconds
+- Ride duration: 8 seconds
+[Time: 15:54:59] Passenger 9 entered the park
+[Time: 15:54:59] Passenger 9 is exploring for 8 seconds
+[Time: 15:54:59] Passenger 16 entered the park
+[Time: 15:54:59] Passenger 16 is exploring for 8 seconds
+[Time: 15:54:59] Passenger 3 entered the park
+[Time: 15:54:59] Passenger 3 is exploring for 2 seconds
+[Time: 15:54:59] Passenger 6 entered the park
+[Time: 15:54:59] Passenger 6 is exploring for 3 seconds
+[Time: 15:54:59] Passenger 2 entered the park
+[Time: 15:54:59] Passenger 2 is exploring for 1 seconds
+[Time: 15:54:59] Passenger 14 entered the park
+[Time: 15:54:59] Passenger 14 is exploring for 7 seconds
+[Time: 15:54:59] Passenger 15 entered the park
+[Time: 15:54:59] Passenger 15 is exploring for 3 seconds
+[Time: 15:54:59] Passenger 19 entered the park
+[Time: 15:54:59] Passenger 19 is exploring for 2 seconds
+[Time: 15:54:59] Passenger 12 entered the park
+[Time: 15:54:59] Passenger 12 is exploring for 4 seconds
+[Time: 15:54:59] Passenger 17 entered the park
+[Time: 15:54:59] Passenger 17 is exploring for 10 seconds
+[Time: 15:54:59] Passenger 4 entered the park
+[Time: 15:55:00] Passenger 4 is exploring for 8 seconds
+[Time: 15:55:00] Passenger 5 entered the park
+[Time: 15:55:00] Passenger 5 is exploring for 8 seconds
+[Time: 15:55:00] Passenger 20 entered the park
+[Time: 15:55:00] Passenger 20 is exploring for 4 seconds
+[Time: 15:55:00] Passenger 10 entered the park
+[Time: 15:55:00] Passenger 10 is exploring for 6 seconds
+[Time: 15:55:00] Passenger 13 entered the park
+[Time: 15:55:00] Passenger 13 is exploring for 5 seconds
+[Time: 15:55:00] Passenger 11 entered the park
+[Time: 15:55:00] Passenger 11 is exploring for 1 seconds
+[Time: 15:55:00] Passenger 7 entered the park
+[Time: 15:55:00] Passenger 7 is exploring for 2 seconds
+[Time: 15:55:00] Passenger 1 entered the park
+[Time: 15:55:00] Passenger 1 is exploring for 1 seconds
+[Time: 15:55:00] Passenger 8 entered the park
+[Time: 15:55:00] Passenger 8 is exploring for 1 seconds
+[Time: 15:55:00] Passenger 18 entered the park
+[Time: 15:55:00] Passenger 18 is exploring for 8 seconds
+[Time: 15:55:00] Passenger 2 is getting a ticket
+[Time: 15:55:01] Passenger 11 is getting a ticket
+[Time: 15:55:01] Passenger 1 is getting a ticket
+[Time: 15:55:01] Passenger 8 is getting a ticket
+[Time: 15:55:01] Passenger 3 is getting a ticket
+[Time: 15:55:01] Passenger 19 is getting a ticket
+[Time: 15:55:02] Passenger 7 is getting a ticket
+[Time: 15:55:02] Passenger 6 is getting a ticket
+[Time: 15:55:02] Passenger 15 is getting a ticket
+[Time: 15:55:03] Passenger 12 is getting a ticket
+[Time: 15:55:04] Passenger 20 is getting a ticket
+
+[Monitor] System State at 15:55:04
+Ticket Queue: [P2 P11 P1 P8 P3 P19 P7 P6 P15 P12 P20 ]
+Ride Queue: [P2 P11 P1 P8 P3 P19 P7 P6 P15 P12 P20 ]
+Car 1 Status: IDLE (0/5 passengers)
+Car 2 Status: IDLE (0/5 passengers)
+Car 3 Status: IDLE (0/5 passengers)
+Passengers in park: 20 (9 exploring, 11 in queues, 0 on rides)
+[Time: 15:55:05] Passenger 13 is getting a ticket
+[Time: 15:55:06] Passenger 10 is getting a ticket
+[Time: 15:55:06] Passenger 14 is getting a ticket
+[Time: 15:55:07] Passenger 16 is getting a ticket
+[Time: 15:55:07] Passenger 9 is getting a ticket
+[Time: 15:55:08] Passenger 4 is getting a ticket
+[Time: 15:55:08] Passenger 5 is getting a ticket
+[Time: 15:55:08] Passenger 18 is getting a ticket
+[Time: 15:55:09] Car 2 is departing with 5 passengers
+
+[Monitor] System State at 15:55:09
+Ticket Queue: [P19 P7 P6 P15 P12 P20 P13 P10 P14 P16 P9 P4 P5 P18 ]
+Ride Queue: [P19 P7 P6 P15 P12 P20 P13 P10 P14 P16 P9 P4 P5 P18 ]
+Car 1 Status: IDLE (0/5 passengers)
+Car 2 Status: RIDING (5/5 passengers)
+Car 3 Status: IDLE (0/5 passengers)
+Passengers in park: 20 (1 exploring, 14 in queues, 5 on rides)
+[Time: 15:55:09] Car 1 is departing with 5 passengers
+[Time: 15:55:09] Car 3 is departing with 5 passengers
+[Time: 15:55:10] Passenger 17 is getting a ticket
+
+[Monitor] System State at 15:55:14
+Ticket Queue: [P9 P4 P5 P18 P17 ]
+Ride Queue: [P9 P4 P5 P18 P17 ]
+Car 1 Status: RIDING (5/5 passengers)
+Car 2 Status: RIDING (5/5 passengers)
+Car 3 Status: RIDING (5/5 passengers)
+Passengers in park: 20 (0 exploring, 5 in queues, 15 on rides)
+[Time: 15:55:17] Car 2 is departing with 5 passengers
+
+[Monitor] System State at 15:55:19
+Ticket Queue: []
+Ride Queue: []
+Car 1 Status: IDLE (0/5 passengers)
+Car 2 Status: RIDING (5/5 passengers)
+Car 3 Status: IDLE (0/5 passengers)
+Passengers in park: 20 (0 exploring, 0 in queues, 5 on rides)
+
+[Monitor] System State at 15:55:24
+Ticket Queue: []
+Ride Queue: []
+Car 1 Status: IDLE (0/5 passengers)
+Car 2 Status: RIDING (5/5 passengers)
+Car 3 Status: IDLE (0/5 passengers)
+Passengers in park: 20 (0 exploring, 0 in queues, 5 on rides)
+
+Simulation complete. All passengers served and unboarded.
+==287738== 
+==287738== HEAP SUMMARY:
+==287738==     in use at exit: 0 bytes in 0 blocks
+==287738==   total heap usage: 125 allocs, 125 frees, 21,256 bytes allocated
+==287738== 
+==287738== All heap blocks were freed -- no leaks are possible
+==287738== 
+==287738== For lists of detected and suppressed errors, rerun with: -s
+==287738== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
