@@ -1,32 +1,73 @@
-// File: part1/park.c - Single Threaded Simulation
+// part1/park.c
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <pthread.h>
 #include <semaphore.h>
+#include <time.h>
 
-pthread_mutex_t ticket_mutex = PTHREAD_MUTEX_INITIALIZER;
-void* passenger_thread(void* arg) {
-    int id = *((int*)arg);
-    printf("Passenger %d is exploring the park...\n", id);
+sem_t ticket_booth;
+sem_t board_sem;
+sem_t unboard_sem;
+pthread_mutex_t log_lock = PTHREAD_MUTEX_INITIALIZER;
+
+void log_event(const char* msg) {
+    pthread_mutex_lock(&log_lock);
+    time_t t = time(NULL);
+    struct tm* tm_info = localtime(&t);
+    char buf[9];
+    strftime(buf, 9, "%T", tm_info);
+    printf("[Time: %s] %s\n", buf, msg);
+    fflush(stdout);
+    pthread_mutex_unlock(&log_lock);
+}
+
+void* passenger(void* arg) {
+    log_event("Passenger 1 entered the park");
+
+    log_event("Passenger 1 is exploring the park...");
     sleep(2);
 
-    pthread_mutex_lock(&ticket_mutex);
-    printf("Passenger %d acquired a ticket.\n", id);
-    pthread_mutex_unlock(&ticket_mutex);
+    log_event("Passenger 1 heading to ticket booth...");
+    sem_wait(&ticket_booth);
+    log_event("Passenger 1 acquired a ticket");
+    sem_post(&ticket_booth);
 
-    printf("Passenger %d boarded the car.\n", id);
-    printf("Passenger %d is on the ride.\n", id);
-    sleep(2);
-    printf("Passenger %d unboarded.\n", id);
+    log_event("Passenger 1 joined the ride queue");
+    sem_wait(&board_sem);
+    log_event("Passenger 1 boarded Car 1");
+
+    sem_wait(&unboard_sem);
+    log_event("Passenger 1 unboarded Car 1");
+    return NULL;
+}
+
+void* car(void* arg) {
+    log_event("Car 1 invoked load()");
+    sem_post(&board_sem); // allow 1 to board
+    sleep(1);
+
+    log_event("Car 1 departed for its run");
+    sleep(3);
+
+    log_event("Car 1 invoked unload()");
+    sem_post(&unboard_sem);
     return NULL;
 }
 
 int main() {
-    pthread_t t;
-    int id = 1;
-    pthread_create(&t, NULL, passenger_thread, &id);
-    pthread_join(t, NULL);
+    printf("===== DUCK PARK SIMULATION (Part 1) =====\n");
+
+    pthread_t t_passenger, t_car;
+    sem_init(&ticket_booth, 0, 1);
+    sem_init(&board_sem, 0, 0);
+    sem_init(&unboard_sem, 0, 0);
+
+    pthread_create(&t_car, NULL, car, NULL);
+    pthread_create(&t_passenger, NULL, passenger, NULL);
+
+    pthread_join(t_passenger, NULL);
+    pthread_join(t_car, NULL);
+
     return 0;
 }
-
