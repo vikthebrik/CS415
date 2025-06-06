@@ -1,626 +1,451 @@
-==1719370== Memcheck, a memory error detector
-==1719370== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==1719370== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==1719370== Command: ./park -n 40 -c 3 -p 5 -w 10 -r 8
-==1719370== 
+==3470218== Memcheck, a memory error detector
+==3470218== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==3470218== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==3470218== Command: ./park -n 40 -c 3 -p 5 -w 10 -r 8
+==3470218== 
 ===== DUCK PARK SIMULATION =====
 [Monitor] Simulation started with parameters:
 - Number of passenger threads: 40
 - Number of cars: 3
 - Capacity per car: 5
-- Park exploration time: 2–5 seconds
+- Park exploration time: 2-5 seconds
 - Car waiting period: 10 seconds
 - Ride duration: 8 seconds
 [Time: 0.26] Passenger 1 exploring for 2 sec
-[Time: 2.30] Passenger 2 exploring for 3 sec
-[Time: 2.31] Passenger 1 is getting ticket
-[Time: 4.35] Passenger 3 exploring for 2 sec
+[Time: 2.29] Passenger 2 exploring for 2 sec
+[Time: 2.31] Car 1 departing with 1 passengers
+[Time: 4.34] Passenger 3 exploring for 5 sec
+[Time: 4.34] Car 3 departing with 1 passengers
 
-[Monitor] State at 5.26 sec
-Ticket Queue: [P1 ]
-Ride Queue: [P1 ]
-Car 1: IDLE (0/5)
-Car 2: IDLE (0/5)
-Car 3: IDLE (0/5)
-Passengers: 2 exploring | 1 in queues | 0 riding
-
-[Time: 5.30] Passenger 2 is getting ticket
-[Time: 6.40] Passenger 4 exploring for 3 sec
-[Time: 6.40] Passenger 3 is getting ticket
-[Time: 8.45] Passenger 5 exploring for 2 sec
-[Time: 9.40] Passenger 4 is getting ticket
-[Time: 10.26] Car 1 departing with 4 passengers
-[Time: 10.26] Car 3 departing with 0 passengers
-
-[Monitor] State at 10.27 sec
+[Monitor] System State at 5.26 seconds
 Ticket Queue: []
 Ride Queue: []
-Car 1: RIDING (4/5)
+Car 1: RIDING (1/5)
 Car 2: IDLE (0/5)
-Car 3: RIDING (0/5)
-Passengers: 1 exploring | 0 in queues | 4 riding
+Car 3: RIDING (1/5)
+Passengers: 1 exploring | 0 in queues | 2 riding
+[Time: 6.39] Passenger 4 exploring for 4 sec
+[Time: 8.44] Passenger 5 exploring for 5 sec
+[Time: 9.34] Car 2 departing with 1 passengers
 
-[Time: 10.27] Car 2 departing with 0 passengers
-[Time: 10.50] Passenger 5 is getting ticket
-[Time: 10.50] Passenger 6 exploring for 3 sec
-[Time: 12.55] Passenger 7 exploring for 5 sec
-[Time: 13.50] Passenger 6 is getting ticket
-[Time: 14.60] Passenger 8 exploring for 4 sec
+[Monitor] System State at 10.26 seconds
+Ticket Queue: []
+Ride Queue: []
+Car 1: RIDING (1/5)
+Car 2: RIDING (1/5)
+Car 3: RIDING (1/5)
+Passengers: 2 exploring | 0 in queues | 3 riding
+[Time: 10.33] Passenger 1 completed first ride
+[Time: 10.33] Passenger 1 exploring for 3 sec
+[Time: 10.39] Car 1 departing with 1 passengers
+[Time: 10.49] Passenger 6 exploring for 2 sec
+[Time: 12.37] Passenger 2 completed first ride
+[Time: 12.37] Passenger 2 exploring for 3 sec
+[Time: 12.55] Car 3 departing with 1 passengers
+[Time: 12.55] Passenger 7 exploring for 3 sec
+[Time: 14.60] Passenger 8 exploring for 2 sec
 
-[Monitor] State at 15.27 sec
-Ticket Queue: [P5 P6 ]
-Ride Queue: [P5 P6 ]
-Car 1: RIDING (4/5)
-Car 2: RIDING (0/5)
-Car 3: RIDING (0/5)
-Passengers: 2 exploring | 2 in queues | 4 riding
+[Monitor] System State at 15.27 seconds
+Ticket Queue: [P1 P5 ]
+Ride Queue: [P1 P5 ]
+Car 1: RIDING (1/5)
+Car 2: RIDING (1/5)
+Car 3: RIDING (1/5)
+Passengers: 3 exploring | 2 in queues | 3 riding
+[Time: 16.66] Passenger 9 exploring for 4 sec
+[Time: 17.34] Car 2 departing with 5 passengers
+[Time: 17.35] Passenger 3 completed first ride
+[Time: 17.35] Passenger 3 exploring for 3 sec
+[Time: 18.40] Passenger 4 completed first ride
+[Time: 18.40] Passenger 4 exploring for 5 sec
+[Time: 18.71] Passenger 10 exploring for 4 sec
 
-[Time: 16.66] Passenger 9 exploring for 2 sec
-[Time: 17.55] Passenger 7 is getting ticket
-[Time: 18.27] Passenger 3 completed first ride
-[Time: 18.27] Passenger 3 exploring for 5 sec
-[Time: 18.27] Passenger 4 completed first ride
-[Time: 18.28] Passenger 4 exploring for 2 sec
-[Time: 18.28] Passenger 2 completed first ride
-[Time: 18.28] Passenger 2 exploring for 2 sec
-[Time: 18.29] Passenger 1 completed first ride
-[Time: 18.29] Passenger 1 exploring for 5 sec
-[Time: 18.61] Passenger 8 is getting ticket
-[Time: 18.71] Passenger 10 exploring for 2 sec
-[Time: 18.71] Passenger 9 is getting ticket
-[Time: 18.72] Car 2 departing with 5 passengers
-
-[Monitor] State at 20.27 sec
+[Monitor] System State at 20.27 seconds
 Ticket Queue: []
 Ride Queue: []
 Car 1: IDLE (0/5)
 Car 2: RIDING (5/5)
-Car 3: IDLE (0/5)
-Passengers: 5 exploring | 0 in queues | 5 riding
+Car 3: RIDING (1/5)
+Passengers: 4 exploring | 0 in queues | 6 riding
+[Time: 20.36] Car 1 departing with 1 passengers
+[Time: 20.57] Passenger 6 completed first ride
+[Time: 20.57] Passenger 6 exploring for 3 sec
+[Time: 20.66] Car 3 departing with 1 passengers
+[Time: 20.76] Passenger 11 exploring for 2 sec
+[Time: 22.84] Passenger 12 exploring for 5 sec
+[Time: 24.90] Passenger 13 exploring for 4 sec
 
-[Time: 20.28] Passenger 4 is getting ticket
-[Time: 20.28] Passenger 2 is getting ticket
-[Time: 20.79] Passenger 11 exploring for 5 sec
-[Time: 20.79] Passenger 10 is getting ticket
-[Time: 22.84] Passenger 12 exploring for 3 sec
-[Time: 23.27] Passenger 3 is getting ticket
-[Time: 23.29] Passenger 1 is getting ticket
-[Time: 24.90] Passenger 13 exploring for 3 sec
-
-[Monitor] State at 25.27 sec
-Ticket Queue: [P4 P2 P10 P3 P1 ]
-Ride Queue: [P4 P2 P10 P3 P1 ]
-Car 1: IDLE (0/5)
+[Monitor] System State at 25.27 seconds
+Ticket Queue: [P10 P11 P4 P6 ]
+Ride Queue: [P10 P11 P4 P6 ]
+Car 1: RIDING (1/5)
 Car 2: RIDING (5/5)
-Car 3: IDLE (0/5)
-Passengers: 3 exploring | 5 in queues | 5 riding
+Car 3: RIDING (1/5)
+Passengers: 2 exploring | 4 in queues | 7 riding
+[Time: 25.34] Car 2 departing with 4 passengers
+[Time: 25.35] Passenger 8 completed first ride
+[Time: 25.35] Passenger 5 completed first ride
+[Time: 25.36] Passenger 5 exploring for 3 sec
+[Time: 25.36] Passenger 2 exploring for 2 sec
+[Time: 25.36] Passenger 8 exploring for 3 sec
+[Time: 25.36] Passenger 7 completed first ride
+[Time: 25.37] Passenger 7 exploring for 2 sec
+[Time: 25.37] Passenger 1 exploring for 2 sec
+[Time: 26.95] Passenger 14 exploring for 3 sec
+[Time: 28.36] Car 1 departing with 4 passengers
+[Time: 28.38] Passenger 3 exploring for 3 sec
+[Time: 28.66] Car 3 departing with 2 passengers
+[Time: 28.68] Passenger 9 completed first ride
+[Time: 28.68] Passenger 9 exploring for 5 sec
+[Time: 29.00] Passenger 15 exploring for 4 sec
 
-[Time: 25.79] Passenger 11 is getting ticket
-[Time: 25.85] Passenger 12 is getting ticket
-[Time: 26.73] Car 2 departing with 5 passengers
-[Time: 26.73] Passenger 7 completed first ride
-[Time: 26.73] Passenger 7 exploring for 5 sec
-[Time: 26.73] Passenger 9 completed first ride
-[Time: 26.73] Passenger 9 exploring for 5 sec
-[Time: 26.74] Passenger 5 completed first ride
-[Time: 26.74] Passenger 5 exploring for 3 sec
-[Time: 26.74] Passenger 8 completed first ride
-[Time: 26.74] Passenger 8 exploring for 4 sec
-[Time: 26.74] Passenger 6 completed first ride
-[Time: 26.75] Passenger 6 exploring for 2 sec
-[Time: 26.95] Passenger 14 exploring for 5 sec
-[Time: 27.90] Passenger 13 is getting ticket
-[Time: 28.27] Car 1 departing with 3 passengers
-[Time: 28.29] Car 3 departing with 0 passengers
-[Time: 28.75] Passenger 6 is getting ticket
-[Time: 29.01] Passenger 15 exploring for 3 sec
-[Time: 29.74] Passenger 5 is getting ticket
-
-[Monitor] State at 30.27 sec
-Ticket Queue: [P6 P5 ]
-Ride Queue: [P6 P5 ]
-Car 1: RIDING (3/5)
-Car 2: RIDING (5/5)
-Car 3: RIDING (0/5)
-Passengers: 5 exploring | 2 in queues | 8 riding
-
-[Time: 30.74] Passenger 8 is getting ticket
-[Time: 31.06] Passenger 16 exploring for 5 sec
-[Time: 31.73] Passenger 7 is getting ticket
-[Time: 31.74] Passenger 9 is getting ticket
-[Time: 31.95] Passenger 14 is getting ticket
-[Time: 32.01] Passenger 15 is getting ticket
-[Time: 33.11] Passenger 17 exploring for 3 sec
-[Time: 34.73] Car 2 departing with 5 passengers
-[Time: 34.73] Passenger 2 exploring for 3 sec
-[Time: 34.73] Passenger 4 exploring for 3 sec
-[Time: 34.73] Passenger 3 exploring for 3 sec
-[Time: 34.73] Passenger 1 exploring for 5 sec
-[Time: 34.74] Passenger 10 completed first ride
-[Time: 34.74] Passenger 10 exploring for 2 sec
+[Monitor] System State at 30.27 seconds
+Ticket Queue: [P13 P14 ]
+Ride Queue: [P13 P14 ]
+Car 1: RIDING (4/5)
+Car 2: RIDING (4/5)
+Car 3: RIDING (2/5)
+Passengers: 3 exploring | 2 in queues | 10 riding
+[Time: 31.06] Passenger 16 exploring for 3 sec
+[Time: 33.13] Passenger 17 exploring for 5 sec
+[Time: 33.34] Car 2 departing with 4 passengers
+[Time: 33.36] Passenger 11 completed first ride
+[Time: 33.36] Passenger 10 completed first ride
+[Time: 33.36] Passenger 10 exploring for 3 sec
+[Time: 33.36] Passenger 6 exploring for 5 sec
+[Time: 33.36] Passenger 4 exploring for 5 sec
+[Time: 33.36] Passenger 11 exploring for 5 sec
 [Time: 35.19] Passenger 18 exploring for 2 sec
 
-[Monitor] State at 35.27 sec
+[Monitor] System State at 35.27 seconds
+Ticket Queue: [P9 P16 ]
+Ride Queue: [P9 P16 ]
+Car 1: RIDING (4/5)
+Car 2: RIDING (4/5)
+Car 3: RIDING (2/5)
+Passengers: 6 exploring | 2 in queues | 10 riding
+[Time: 36.36] Car 1 departing with 2 passengers
+[Time: 36.37] Passenger 1 exploring for 4 sec
+[Time: 36.37] Passenger 2 exploring for 5 sec
+[Time: 36.37] Passenger 12 completed first ride
+[Time: 36.38] Passenger 12 exploring for 3 sec
+[Time: 36.38] Passenger 7 exploring for 4 sec
+[Time: 36.66] Car 3 departing with 1 passengers
+[Time: 36.68] Passenger 8 exploring for 2 sec
+[Time: 36.68] Passenger 5 exploring for 5 sec
+[Time: 37.24] Passenger 19 exploring for 4 sec
+[Time: 39.29] Passenger 20 exploring for 4 sec
+
+[Monitor] System State at 40.27 seconds
+Ticket Queue: [P18 P17 P6 P4 P11 P8 P12 ]
+Ride Queue: [P18 P17 P6 P4 P11 P8 P12 ]
+Car 1: RIDING (2/5)
+Car 2: RIDING (4/5)
+Car 3: RIDING (1/5)
+Passengers: 6 exploring | 7 in queues | 7 riding
+[Time: 41.35] Car 2 departing with 5 passengers
+[Time: 41.35] Passenger 21 exploring for 2 sec
+[Time: 41.37] Passenger 14 completed first ride
+[Time: 41.37] Passenger 14 exploring for 3 sec
+[Time: 41.37] Passenger 13 completed first ride
+[Time: 41.37] Passenger 13 exploring for 2 sec
+[Time: 41.37] Passenger 3 exploring for 4 sec
+[Time: 41.37] Passenger 15 completed first ride
+[Time: 41.38] Passenger 15 exploring for 3 sec
+[Time: 43.40] Passenger 22 exploring for 5 sec
+[Time: 44.36] Car 1 departing with 5 passengers
+[Time: 44.37] Passenger 16 completed first ride
+[Time: 44.37] Passenger 16 exploring for 2 sec
+[Time: 44.37] Passenger 9 exploring for 5 sec
+[Time: 44.66] Car 3 departing with 5 passengers
+[Time: 44.67] Passenger 10 exploring for 2 sec
+
+[Monitor] System State at 45.27 seconds
 Ticket Queue: [P14 P15 ]
 Ride Queue: [P14 P15 ]
-Car 1: RIDING (3/5)
-Car 2: RIDING (5/5)
-Car 3: RIDING (0/5)
-Passengers: 8 exploring | 2 in queues | 8 riding
-
-[Time: 36.06] Passenger 16 is getting ticket
-[Time: 36.11] Passenger 17 is getting ticket
-[Time: 36.27] Passenger 12 completed first ride
-[Time: 36.27] Passenger 12 exploring for 5 sec
-[Time: 36.27] Passenger 13 completed first ride
-[Time: 36.27] Passenger 13 exploring for 2 sec
-[Time: 36.27] Passenger 11 completed first ride
-[Time: 36.28] Passenger 11 exploring for 3 sec
-[Time: 36.75] Passenger 10 is getting ticket
-[Time: 36.75] Car 3 departing with 5 passengers
-[Time: 37.24] Passenger 18 is getting ticket
-[Time: 37.25] Passenger 19 exploring for 5 sec
-[Time: 37.73] Passenger 2 is getting ticket
-[Time: 37.73] Passenger 4 is getting ticket
-[Time: 37.74] Passenger 3 is getting ticket
-[Time: 38.28] Passenger 13 is getting ticket
-[Time: 39.30] Passenger 11 is getting ticket
-[Time: 39.30] Passenger 20 exploring for 3 sec
-[Time: 39.74] Passenger 1 is getting ticket
-
-[Monitor] State at 40.27 sec
-Ticket Queue: [P18 P2 P4 P3 P13 P11 P1 ]
-Ride Queue: [P18 P2 P4 P3 P13 P11 P1 ]
-Car 1: IDLE (0/5)
-Car 2: RIDING (5/5)
-Car 3: RIDING (5/5)
-Passengers: 3 exploring | 7 in queues | 10 riding
-
-[Time: 41.27] Passenger 12 is getting ticket
-[Time: 41.35] Passenger 21 exploring for 2 sec
-[Time: 42.25] Passenger 19 is getting ticket
-[Time: 42.30] Passenger 20 is getting ticket
-[Time: 42.73] Car 2 departing with 5 passengers
-[Time: 42.73] Car 1 departing with 5 passengers
-[Time: 42.73] Passenger 8 exploring for 3 sec
-[Time: 42.73] Passenger 5 exploring for 4 sec
-[Time: 42.73] Passenger 6 exploring for 3 sec
-[Time: 42.73] Passenger 7 exploring for 2 sec
-[Time: 42.73] Passenger 9 exploring for 4 sec
-[Time: 43.40] Passenger 21 is getting ticket
-[Time: 43.40] Passenger 22 exploring for 5 sec
-[Time: 44.74] Passenger 7 is getting ticket
-[Time: 44.76] Passenger 16 completed first ride
-[Time: 44.76] Passenger 16 exploring for 3 sec
-[Time: 44.76] Passenger 17 completed first ride
-[Time: 44.77] Passenger 17 exploring for 3 sec
-[Time: 44.77] Passenger 15 completed first ride
-[Time: 44.78] Passenger 15 exploring for 2 sec
-[Time: 44.78] Passenger 10 exploring for 5 sec
-[Time: 44.78] Passenger 14 completed first ride
-[Time: 44.79] Passenger 14 exploring for 2 sec
-
-[Monitor] State at 45.28 sec
-Ticket Queue: [P21 P7 ]
-Ride Queue: [P21 P7 ]
 Car 1: RIDING (5/5)
 Car 2: RIDING (5/5)
-Car 3: IDLE (0/5)
-Passengers: 10 exploring | 2 in queues | 10 riding
-
-[Time: 45.46] Passenger 23 exploring for 5 sec
-[Time: 45.74] Passenger 8 is getting ticket
-[Time: 45.74] Passenger 6 is getting ticket
-[Time: 46.74] Passenger 5 is getting ticket
-[Time: 46.74] Car 3 departing with 5 passengers
-[Time: 46.74] Passenger 9 is getting ticket
-[Time: 46.78] Passenger 15 is getting ticket
-[Time: 46.79] Passenger 14 is getting ticket
-[Time: 47.53] Passenger 24 exploring for 2 sec
-[Time: 47.77] Passenger 16 is getting ticket
-[Time: 47.78] Passenger 17 is getting ticket
-[Time: 48.41] Passenger 22 is getting ticket
+Car 3: RIDING (5/5)
+Passengers: 5 exploring | 2 in queues | 15 riding
+[Time: 45.46] Passenger 23 exploring for 3 sec
+[Time: 47.51] Passenger 24 exploring for 5 sec
+[Time: 49.35] Car 2 departing with 5 passengers
+[Time: 49.36] Passenger 4 exploring for 3 sec
+[Time: 49.36] Passenger 18 completed first ride
+[Time: 49.36] Passenger 18 exploring for 2 sec
+[Time: 49.36] Passenger 11 exploring for 4 sec
+[Time: 49.36] Passenger 6 exploring for 2 sec
+[Time: 49.36] Passenger 17 completed first ride
+[Time: 49.37] Passenger 17 exploring for 3 sec
 [Time: 49.59] Passenger 25 exploring for 4 sec
-[Time: 49.59] Passenger 24 is getting ticket
-[Time: 49.78] Passenger 10 is getting ticket
 
-[Monitor] State at 50.28 sec
-Ticket Queue: [P9 P15 P14 P16 P17 P22 P24 P10 ]
-Ride Queue: [P9 P15 P14 P16 P17 P22 P24 P10 ]
+[Monitor] System State at 50.27 seconds
+Ticket Queue: [P22 P23 P9 ]
+Ride Queue: [P22 P23 P9 ]
 Car 1: RIDING (5/5)
 Car 2: RIDING (5/5)
 Car 3: RIDING (5/5)
-Passengers: 2 exploring | 8 in queues | 15 riding
+Passengers: 7 exploring | 3 in queues | 15 riding
+[Time: 51.64] Passenger 26 exploring for 2 sec
+[Time: 52.36] Car 1 departing with 5 passengers
+[Time: 52.37] Passenger 19 completed first ride
+[Time: 52.37] Passenger 19 exploring for 2 sec
+[Time: 52.37] Passenger 7 exploring for 5 sec
+[Time: 52.37] Passenger 8 exploring for 5 sec
+[Time: 52.37] Passenger 12 exploring for 5 sec
+[Time: 52.37] Passenger 1 exploring for 5 sec
+[Time: 52.66] Car 3 departing with 3 passengers
+[Time: 52.67] Passenger 2 exploring for 3 sec
+[Time: 52.68] Passenger 21 completed first ride
+[Time: 52.68] Passenger 21 exploring for 4 sec
+[Time: 52.68] Passenger 5 exploring for 2 sec
+[Time: 52.68] Passenger 13 exploring for 5 sec
+[Time: 52.68] Passenger 20 completed first ride
+[Time: 52.69] Passenger 20 exploring for 4 sec
+[Time: 53.71] Passenger 27 exploring for 5 sec
 
-[Time: 50.46] Passenger 23 is getting ticket
-[Time: 50.73] Car 2 departing with 5 passengers
-[Time: 50.73] Passenger 13 exploring for 5 sec
-[Time: 50.73] Passenger 2 exploring for 5 sec
-[Time: 50.73] Passenger 4 exploring for 4 sec
-[Time: 50.73] Passenger 20 completed first ride
-[Time: 50.74] Passenger 20 exploring for 2 sec
-[Time: 50.73] Passenger 3 exploring for 5 sec
-[Time: 50.74] Passenger 1 exploring for 2 sec
-[Time: 50.73] Passenger 12 exploring for 3 sec
-[Time: 50.74] Passenger 18 completed first ride
-[Time: 50.75] Passenger 18 exploring for 2 sec
-[Time: 50.75] Passenger 11 exploring for 4 sec
-[Time: 50.75] Passenger 19 completed first ride
-[Time: 50.75] Passenger 19 exploring for 2 sec
-[Time: 51.67] Passenger 26 exploring for 2 sec
-[Time: 52.74] Passenger 20 is getting ticket
-[Time: 52.74] Car 1 departing with 5 passengers
-[Time: 52.74] Passenger 1 is getting ticket
-[Time: 52.75] Passenger 18 is getting ticket
-[Time: 52.76] Passenger 19 is getting ticket
-[Time: 53.59] Passenger 25 is getting ticket
-[Time: 53.72] Passenger 27 exploring for 3 sec
-[Time: 53.72] Passenger 26 is getting ticket
-[Time: 53.75] Passenger 12 is getting ticket
-[Time: 54.74] Passenger 4 is getting ticket
-[Time: 54.74] Car 3 departing with 5 passengers
-[Time: 54.75] Passenger 7 exploring for 2 sec
-[Time: 54.75] Passenger 6 exploring for 3 sec
-[Time: 54.75] Passenger 8 exploring for 4 sec
-[Time: 54.75] Passenger 5 exploring for 2 sec
-[Time: 54.75] Passenger 21 completed first ride
-[Time: 54.75] Passenger 21 exploring for 4 sec
-[Time: 54.76] Passenger 11 is getting ticket
+[Monitor] System State at 55.28 seconds
+Ticket Queue: [P11 P25 P26 P19 P5 ]
+Ride Queue: [P11 P25 P26 P19 P5 ]
+Car 1: RIDING (5/5)
+Car 2: RIDING (5/5)
+Car 3: RIDING (3/5)
+Passengers: 9 exploring | 5 in queues | 13 riding
+[Time: 55.76] Passenger 28 exploring for 3 sec
+[Time: 57.35] Car 2 departing with 5 passengers
+[Time: 57.36] Passenger 15 exploring for 2 sec
+[Time: 57.37] Passenger 14 exploring for 2 sec
+[Time: 57.37] Passenger 10 exploring for 4 sec
+[Time: 57.37] Passenger 3 exploring for 2 sec
+[Time: 57.37] Passenger 16 exploring for 4 sec
+[Time: 57.81] Passenger 29 exploring for 2 sec
+[Time: 59.87] Passenger 30 exploring for 2 sec
 
-[Monitor] State at 55.28 sec
-Ticket Queue: [P12 P4 P11 ]
-Ride Queue: [P12 P4 P11 ]
+[Monitor] System State at 60.28 seconds
+Ticket Queue: [P2 P21 P20 P7 P8 P12 P1 P13 P27 P28 P15 P14 P3 P29 ]
+Ride Queue: [P2 P21 P20 P7 P8 P12 P1 P13 P27 P28 P15 P14 P3 P29 ]
+Car 1: RIDING (5/5)
+Car 2: RIDING (5/5)
+Car 3: RIDING (3/5)
+Passengers: 3 exploring | 14 in queues | 13 riding
+[Time: 60.36] Car 1 departing with 5 passengers
+[Time: 60.38] Passenger 23 completed first ride
+[Time: 60.38] Passenger 23 exploring for 4 sec
+[Time: 60.38] Passenger 22 completed first ride
+[Time: 60.39] Passenger 22 exploring for 5 sec
+[Time: 60.39] Passenger 9 exploring for 2 sec
+[Time: 60.39] Passenger 6 exploring for 5 sec
+[Time: 60.39] Passenger 18 exploring for 4 sec
+[Time: 60.66] Car 3 departing with 5 passengers
+[Time: 60.67] Passenger 4 exploring for 3 sec
+[Time: 60.67] Passenger 24 completed first ride
+[Time: 60.68] Passenger 24 exploring for 4 sec
+[Time: 60.68] Passenger 17 exploring for 5 sec
+[Time: 61.95] Passenger 31 exploring for 4 sec
+[Time: 64.00] Passenger 32 exploring for 5 sec
+
+[Monitor] System State at 65.28 seconds
+Ticket Queue: [P15 P14 P3 P29 P10 P16 P30 P9 P4 P23 P18 P24 ]
+Ride Queue: [P15 P14 P3 P29 P10 P16 P30 P9 P4 P23 P18 P24 ]
 Car 1: RIDING (5/5)
 Car 2: RIDING (5/5)
 Car 3: RIDING (5/5)
-Passengers: 9 exploring | 3 in queues | 15 riding
+Passengers: 5 exploring | 12 in queues | 15 riding
+[Time: 65.35] Car 2 departing with 5 passengers
+[Time: 65.36] Passenger 25 completed first ride
+[Time: 65.36] Passenger 25 exploring for 3 sec
+[Time: 65.36] Passenger 11 exploring for 4 sec
+[Time: 65.36] Passenger 26 completed first ride
+[Time: 65.38] Passenger 26 exploring for 5 sec
+[Time: 65.38] Passenger 5 exploring for 2 sec
+[Time: 65.38] Passenger 19 exploring for 3 sec
+[Time: 66.05] Passenger 33 exploring for 4 sec
+[Time: 68.11] Passenger 34 exploring for 5 sec
+[Time: 68.36] Car 1 departing with 5 passengers
+[Time: 68.38] Passenger 20 exploring for 5 sec
+[Time: 68.38] Passenger 2 exploring for 3 sec
+[Time: 68.38] Passenger 7 exploring for 5 sec
+[Time: 68.38] Passenger 8 exploring for 5 sec
+[Time: 68.38] Passenger 21 exploring for 4 sec
+[Time: 68.66] Car 3 departing with 5 passengers
+[Time: 68.67] Passenger 1 exploring for 5 sec
+[Time: 68.67] Passenger 12 exploring for 2 sec
+[Time: 68.67] Passenger 27 completed first ride
+[Time: 68.68] Passenger 27 exploring for 2 sec
+[Time: 68.68] Passenger 28 completed first ride
+[Time: 68.68] Passenger 28 exploring for 5 sec
+[Time: 68.68] Passenger 13 exploring for 4 sec
+[Time: 70.16] Passenger 35 exploring for 2 sec
 
-[Time: 55.78] Passenger 28 exploring for 3 sec
-[Time: 55.78] Passenger 13 is getting ticket
-[Time: 55.78] Passenger 2 is getting ticket
-[Time: 55.78] Passenger 3 is getting ticket
-[Time: 56.72] Passenger 27 is getting ticket
-[Time: 56.75] Passenger 7 is getting ticket
-[Time: 56.75] Passenger 5 is getting ticket
-[Time: 57.75] Passenger 6 is getting ticket
-[Time: 57.83] Passenger 29 exploring for 2 sec
-[Time: 58.73] Car 2 departing with 5 passengers
-[Time: 58.73] Passenger 14 exploring for 4 sec
-[Time: 58.73] Passenger 15 exploring for 5 sec
-[Time: 58.73] Passenger 16 exploring for 3 sec
-[Time: 58.73] Passenger 17 exploring for 4 sec
-[Time: 58.73] Passenger 9 exploring for 2 sec
-[Time: 58.75] Passenger 8 is getting ticket
-[Time: 58.75] Passenger 21 is getting ticket
-[Time: 58.78] Passenger 28 is getting ticket
-[Time: 59.88] Passenger 29 is getting ticket
-[Time: 59.88] Passenger 30 exploring for 5 sec
-
-[Monitor] State at 60.28 sec
-Ticket Queue: [P3 P27 P7 P5 P6 P8 P21 P28 P29 ]
-Ride Queue: [P3 P27 P7 P5 P6 P8 P21 P28 P29 ]
+[Monitor] System State at 70.28 seconds
+Ticket Queue: [P31 P5 P25 P19 P32 P11 P33 ]
+Ride Queue: [P31 P5 P25 P19 P32 P11 P33 ]
 Car 1: RIDING (5/5)
 Car 2: RIDING (5/5)
 Car 3: RIDING (5/5)
-Passengers: 6 exploring | 9 in queues | 15 riding
+Passengers: 13 exploring | 7 in queues | 15 riding
+[Time: 72.21] Passenger 36 exploring for 3 sec
+[Time: 73.35] Car 2 departing with 5 passengers
+[Time: 73.36] Passenger 14 exploring for 4 sec
+[Time: 73.36] Passenger 15 exploring for 2 sec
+[Time: 73.36] Passenger 3 exploring for 5 sec
+[Time: 73.36] Passenger 29 completed first ride
+[Time: 73.37] Passenger 29 exploring for 3 sec
+[Time: 73.37] Passenger 10 exploring for 3 sec
+[Time: 74.27] Passenger 37 exploring for 5 sec
 
-[Time: 60.74] Car 1 departing with 5 passengers
-[Time: 60.75] Passenger 23 completed first ride
-[Time: 60.75] Passenger 23 exploring for 3 sec
-[Time: 60.75] Passenger 9 is getting ticket
-[Time: 60.75] Passenger 24 completed first ride
-[Time: 60.75] Passenger 24 exploring for 5 sec
-[Time: 60.75] Passenger 10 exploring for 5 sec
-[Time: 60.76] Passenger 20 exploring for 2 sec
-[Time: 60.76] Passenger 22 completed first ride
-[Time: 60.76] Passenger 22 exploring for 2 sec
-[Time: 61.74] Passenger 16 is getting ticket
-[Time: 61.93] Passenger 31 exploring for 3 sec
-[Time: 62.74] Passenger 14 is getting ticket
-[Time: 62.74] Passenger 17 is getting ticket
-[Time: 62.74] Car 3 departing with 5 passengers
-[Time: 62.74] Passenger 25 completed first ride
-[Time: 62.75] Passenger 25 exploring for 5 sec
-[Time: 62.75] Passenger 26 completed first ride
-[Time: 62.75] Passenger 26 exploring for 5 sec
-[Time: 62.75] Passenger 19 exploring for 3 sec
-[Time: 62.75] Passenger 1 exploring for 3 sec
-[Time: 62.75] Passenger 18 exploring for 2 sec
-[Time: 62.76] Passenger 20 is getting ticket
-[Time: 62.76] Passenger 22 is getting ticket
-[Time: 63.74] Passenger 15 is getting ticket
-[Time: 63.75] Passenger 23 is getting ticket
-[Time: 63.99] Passenger 32 exploring for 3 sec
-[Time: 64.76] Passenger 18 is getting ticket
-[Time: 64.89] Passenger 30 is getting ticket
-[Time: 64.93] Passenger 31 is getting ticket
-
-[Monitor] State at 65.28 sec
-Ticket Queue: [P16 P14 P17 P20 P22 P15 P23 P18 P30 P31 ]
-Ride Queue: [P16 P14 P17 P20 P22 P15 P23 P18 P30 P31 ]
+[Monitor] System State at 75.28 seconds
+Ticket Queue: [P11 P33 P26 P12 P27 P2 P35 P21 P13 P34 P20 P7 P8 P1 P28 P36 ]
+Ride Queue: [P11 P33 P26 P12 P27 P2 P35 P21 P13 P34 P20 P7 P8 P1 P28 P36 ]
 Car 1: RIDING (5/5)
 Car 2: RIDING (5/5)
 Car 3: RIDING (5/5)
-Passengers: 7 exploring | 10 in queues | 15 riding
+Passengers: 6 exploring | 16 in queues | 15 riding
+[Time: 76.35] Passenger 38 exploring for 2 sec
+[Time: 76.36] Car 1 departing with 5 passengers
+[Time: 76.38] Passenger 16 exploring for 4 sec
+[Time: 76.38] Passenger 9 exploring for 3 sec
+[Time: 76.38] Passenger 23 exploring for 5 sec
+[Time: 76.38] Passenger 30 completed first ride
+[Time: 76.38] Passenger 4 exploring for 2 sec
+[Time: 76.39] Passenger 30 exploring for 2 sec
+[Time: 76.66] Car 3 departing with 5 passengers
+[Time: 76.67] Passenger 6 exploring for 2 sec
+[Time: 76.67] Passenger 18 exploring for 4 sec
+[Time: 76.67] Passenger 24 exploring for 5 sec
+[Time: 76.67] Passenger 22 exploring for 2 sec
+[Time: 76.68] Passenger 17 exploring for 2 sec
+[Time: 78.40] Passenger 39 exploring for 3 sec
 
-[Time: 65.75] Passenger 24 is getting ticket
-[Time: 65.76] Passenger 19 is getting ticket
-[Time: 65.76] Passenger 1 is getting ticket
-[Time: 65.76] Passenger 10 is getting ticket
-[Time: 66.07] Passenger 33 exploring for 3 sec
-[Time: 66.73] Car 2 departing with 5 passengers
-[Time: 66.74] Passenger 11 exploring for 3 sec
-[Time: 66.74] Passenger 12 exploring for 5 sec
-[Time: 66.74] Passenger 2 exploring for 3 sec
-[Time: 66.74] Passenger 4 exploring for 3 sec
-[Time: 66.74] Passenger 13 exploring for 2 sec
-[Time: 66.99] Passenger 32 is getting ticket
-[Time: 67.75] Passenger 25 is getting ticket
-[Time: 67.75] Passenger 26 is getting ticket
-[Time: 68.12] Passenger 34 exploring for 4 sec
-[Time: 68.74] Car 1 departing with 5 passengers
-[Time: 68.75] Passenger 13 is getting ticket
-[Time: 68.75] Passenger 27 completed first ride
-[Time: 68.75] Passenger 27 exploring for 5 sec
-[Time: 68.75] Passenger 6 exploring for 2 sec
-[Time: 68.75] Passenger 7 exploring for 2 sec
-[Time: 68.75] Passenger 5 exploring for 4 sec
-[Time: 68.75] Passenger 3 exploring for 3 sec
-[Time: 69.07] Passenger 33 is getting ticket
-[Time: 69.74] Passenger 11 is getting ticket
-[Time: 69.74] Passenger 2 is getting ticket
-[Time: 69.75] Passenger 4 is getting ticket
-[Time: 70.17] Passenger 35 exploring for 2 sec
-
-[Monitor] State at 70.28 sec
-Ticket Queue: [P24 P19 P1 P10 P32 P25 P26 P13 P33 P11 P2 P4 ]
-Ride Queue: [P24 P19 P1 P10 P32 P25 P26 P13 P33 P11 P2 P4 ]
+[Monitor] System State at 80.28 seconds
+Ticket Queue: [P20 P7 P8 P1 P28 P36 P15 P29 P10 P14 P3 P4 P30 P38 P6 P22 P17 P37 P9 ]
+Ride Queue: [P20 P7 P8 P1 P28 P36 P15 P29 P10 P14 P3 P4 P30 P38 P6 P22 P17 P37 P9 ]
 Car 1: RIDING (5/5)
 Car 2: RIDING (5/5)
 Car 3: RIDING (5/5)
-Passengers: 8 exploring | 12 in queues | 15 riding
+Passengers: 5 exploring | 19 in queues | 15 riding
+[Time: 80.48] Passenger 40 exploring for 5 sec
+[Time: 81.35] Car 2 departing with 5 passengers
+[Time: 81.36] Passenger 5 exploring for 5 sec
+[Time: 81.36] [Time: 81.36] Passenger 31 completed first ride
+Passenger 25 exploring for 4 sec
+[Time: 81.37] Passenger 31 exploring for 4 sec
+[Time: 81.37] Passenger 19 exploring for 3 sec
+[Time: 81.37] Passenger 32 completed first ride
+[Time: 81.38] Passenger 32 exploring for 4 sec
+[Time: 84.36] Car 1 departing with 5 passengers
+[Time: 84.38] Passenger 12 exploring for 3 sec
+[Time: 84.38] Passenger 26 exploring for 3 sec
+[Time: 84.38] Passenger 27 exploring for 4 sec
+[Time: 84.38] Passenger 11 exploring for 2 sec
+[Time: 84.38] Passenger 33 completed first ride
+[Time: 84.39] Passenger 33 exploring for 2 sec
+[Time: 84.66] Car 3 departing with 5 passengers
+[Time: 84.67] Passenger 13 exploring for 4 sec
+[Time: 84.67] Passenger 21 exploring for 3 sec
+[Time: 84.67] Passenger 34 completed first ride
+[Time: 84.68] Passenger 34 exploring for 4 sec
+[Time: 84.68] Passenger 2 exploring for 5 sec
+[Time: 84.68] Passenger 35 completed first ride
+[Time: 84.69] Passenger 35 exploring for 3 sec
 
-[Time: 70.74] Car 3 departing with 5 passengers
-[Time: 70.75] Passenger 21 exploring for 5 sec
-[Time: 70.75] Passenger 9 exploring for 4 sec
-[Time: 70.75] Passenger 29 completed first ride
-[Time: 70.75] Passenger 29 exploring for 2 sec
-[Time: 70.75] Passenger 8 exploring for 3 sec
-[Time: 70.75] Passenger 28 completed first ride
-[Time: 70.76] Passenger 28 exploring for 3 sec
-[Time: 70.76] Passenger 6 is getting ticket
-[Time: 70.77] Passenger 7 is getting ticket
-[Time: 71.74] Passenger 12 is getting ticket
-[Time: 71.76] Passenger 3 is getting ticket
-[Time: 72.12] Passenger 34 is getting ticket
-[Time: 72.22] Passenger 36 exploring for 3 sec
-[Time: 72.23] Passenger 35 is getting ticket
-[Time: 72.76] Passenger 29 is getting ticket
-[Time: 72.76] Passenger 5 is getting ticket
-[Time: 73.75] Passenger 27 is getting ticket
-[Time: 73.76] Passenger 8 is getting ticket
-[Time: 73.76] Passenger 28 is getting ticket
-[Time: 74.28] Passenger 37 exploring for 3 sec
-[Time: 74.73] Car 2 departing with 5 passengers
-[Time: 74.74] Passenger 14 exploring for 3 sec
-[Time: 74.74] Passenger 22 exploring for 2 sec
-[Time: 74.74] Passenger 20 exploring for 3 sec
-[Time: 74.74] Passenger 17 exploring for 3 sec
-[Time: 74.74] Passenger 16 exploring for 3 sec
-[Time: 74.75] Passenger 9 is getting ticket
-[Time: 75.23] Passenger 36 is getting ticket
-
-[Monitor] State at 75.28 sec
-Ticket Queue: [P2 P4 P6 P7 P12 P3 P34 P35 P29 P5 P27 P8 P28 P9 P36 ]
-Ride Queue: [P2 P4 P6 P7 P12 P3 P34 P35 P29 P5 P27 P8 P28 P9 P36 ]
+[Monitor] System State at 85.28 seconds
+Ticket Queue: [P22 P17 P37 P9 P16 P18 P23 P39 P24 P19 ]
+Ride Queue: [P22 P17 P37 P9 P16 P18 P23 P39 P24 P19 ]
 Car 1: RIDING (5/5)
 Car 2: RIDING (5/5)
 Car 3: RIDING (5/5)
-Passengers: 7 exploring | 15 in queues | 15 riding
+Passengers: 15 exploring | 10 in queues | 15 riding
+[Time: 89.35] Car 2 departing with 5 passengers
+[Time: 89.36] Passenger 7 exploring for 2 sec
+[Time: 89.37] Passenger 8 exploring for 2 sec
+[Time: 89.37] Passenger 20 exploring for 2 sec
+[Time: 89.37] Passenger 1 exploring for 4 sec
+[Time: 89.37] Passenger 28 exploring for 2 sec
 
-[Time: 75.75] Passenger 21 is getting ticket
-[Time: 76.33] Passenger 38 exploring for 2 sec
-[Time: 76.74] Passenger 22 is getting ticket
-[Time: 76.74] Car 1 departing with 5 passengers
-[Time: 76.74] Passenger 31 completed first ride
-[Time: 76.75] Passenger 31 exploring for 2 sec
-[Time: 76.75] Passenger 30 completed first ride
-[Time: 76.75] Passenger 30 exploring for 4 sec
-[Time: 76.75] Passenger 15 exploring for 3 sec
-[Time: 76.75] Passenger 18 exploring for 3 sec
-[Time: 76.75] Passenger 23 exploring for 2 sec
-[Time: 77.28] Passenger 37 is getting ticket
-[Time: 77.74] Passenger 14 is getting ticket
-[Time: 77.74] Passenger 20 is getting ticket
-[Time: 77.75] Passenger 17 is getting ticket
-[Time: 77.75] Passenger 16 is getting ticket
-[Time: 78.33] Passenger 38 is getting ticket
-[Time: 78.39] Passenger 39 exploring for 5 sec
-[Time: 78.74] Car 3 departing with 5 passengers
-[Time: 78.75] Passenger 1 exploring for 4 sec
-[Time: 78.75] Passenger 24 exploring for 5 sec
-[Time: 78.75] Passenger 32 completed first ride
-[Time: 78.76] Passenger 32 exploring for 2 sec
-[Time: 78.76] Passenger 10 exploring for 5 sec
-[Time: 78.76] Passenger 19 exploring for 2 sec
-[Time: 78.76] Passenger 31 is getting ticket
-[Time: 78.77] Passenger 23 is getting ticket
-[Time: 79.76] Passenger 15 is getting ticket
-[Time: 79.76] Passenger 18 is getting ticket
-
-[Monitor] State at 80.28 sec
-Ticket Queue: [P27 P8 P28 P9 P36 P21 P22 P37 P14 P20 P17 P16 P38 P31 P23 P15 P18 ]
-Ride Queue: [P27 P8 P28 P9 P36 P21 P22 P37 P14 P20 P17 P16 P38 P31 P23 P15 P18 ]
-Car 1: RIDING (5/5)
-Car 2: RIDING (5/5)
-Car 3: RIDING (5/5)
-Passengers: 7 exploring | 17 in queues | 15 riding
-
-[Time: 80.44] Passenger 40 exploring for 4 sec
-[Time: 80.75] Passenger 30 is getting ticket
-[Time: 80.76] Passenger 32 is getting ticket
-[Time: 80.77] Passenger 19 is getting ticket
-[Time: 82.73] Car 2 departing with 5 passengers
-[Time: 82.73] Passenger 11 exploring for 4 sec
-[Time: 82.73] Passenger 25 exploring for 2 sec
-[Time: 82.73] Passenger 33 completed first ride
-[Time: 82.74] Passenger 33 exploring for 4 sec
-[Time: 82.74] Passenger 26 exploring for 5 sec
-[Time: 82.74] Passenger 13 exploring for 4 sec
-[Time: 82.75] Passenger 1 is getting ticket
-[Time: 83.39] Passenger 39 is getting ticket
-[Time: 83.75] Passenger 24 is getting ticket
-[Time: 83.76] Passenger 10 is getting ticket
-[Time: 84.44] Passenger 40 is getting ticket
-[Time: 84.74] Passenger 25 is getting ticket
-[Time: 84.74] Car 1 departing with 5 passengers
-[Time: 84.75] Passenger 12 exploring for 4 sec
-[Time: 84.75] Passenger 4 exploring for 4 sec
-[Time: 84.75] Passenger 6 exploring for 2 sec
-[Time: 84.75] Passenger 7 exploring for 5 sec
-[Time: 84.75] Passenger 2 exploring for 4 sec
-
-[Monitor] State at 85.28 sec
-Ticket Queue: [P17 P16 P38 P31 P23 P15 P18 P30 P32 P19 P1 P39 P24 P10 P40 P25 ]
-Ride Queue: [P17 P16 P38 P31 P23 P15 P18 P30 P32 P19 P1 P39 P24 P10 P40 P25 ]
-Car 1: RIDING (5/5)
-Car 2: RIDING (5/5)
-Car 3: RIDING (5/5)
-Passengers: 9 exploring | 16 in queues | 15 riding
-
-[Time: 86.74] Passenger 11 is getting ticket
-[Time: 86.75] Car 3 departing with 5 passengers
-[Time: 86.75] Passenger 29 exploring for 3 sec
-[Time: 86.75] Passenger 3 exploring for 3 sec
-[Time: 86.75] Passenger 33 is getting ticket
-[Time: 86.76] Passenger 5 exploring for 5 sec
-[Time: 86.76] Passenger 35 completed first ride
-[Time: 86.76] Passenger 35 exploring for 4 sec
-[Time: 86.76] Passenger 34 completed first ride
-[Time: 86.77] Passenger 34 exploring for 3 sec
-[Time: 86.77] Passenger 6 is getting ticket
-[Time: 86.78] Passenger 13 is getting ticket
-[Time: 87.75] Passenger 26 is getting ticket
-[Time: 88.75] Passenger 12 is getting ticket
-[Time: 88.75] Passenger 4 is getting ticket
-[Time: 88.76] Passenger 2 is getting ticket
-[Time: 89.75] Passenger 29 is getting ticket
-[Time: 89.75] Passenger 7 is getting ticket
-[Time: 89.76] Passenger 3 is getting ticket
-[Time: 89.78] Passenger 34 is getting ticket
-
-[Monitor] State at 90.28 sec
-Ticket Queue: [P15 P18 P30 P32 P19 P1 P39 P24 P10 P40 P25 P11 P33 P6 P13 P26 P12 P4 P2 P29 P7 P3 P34 ]
-Ride Queue: [P15 P18 P30 P32 P19 P1 P39 P24 P10 P40 P25 P11 P33 P6 P13 P26 P12 P4 P2 P29 P7 P3 P34 ]
-Car 1: RIDING (5/5)
-Car 2: RIDING (5/5)
-Car 3: RIDING (5/5)
-Passengers: 2 exploring | 23 in queues | 15 riding
-
-[Time: 90.73] Car 2 departing with 5 passengers
-[Time: 90.73] Passenger 9 exploring for 2 sec
-[Time: 90.74] Passenger 28 exploring for 5 sec
-[Time: 90.74] Passenger 36 completed first ride
-[Time: 90.74] Passenger 36 exploring for 5 sec
-[Time: 90.74] Passenger 27 exploring for 2 sec
-[Time: 90.74] Passenger 8 exploring for 5 sec
-[Time: 90.77] Passenger 35 is getting ticket
-[Time: 91.76] Passenger 5 is getting ticket
-[Time: 92.74] Passenger 9 is getting ticket
-[Time: 92.74] Car 1 departing with 5 passengers
-[Time: 92.75] Passenger 27 is getting ticket
-[Time: 92.75] Passenger 22 exploring for 3 sec
-[Time: 92.75] Passenger 37 completed first ride
-[Time: 92.75] Passenger 37 exploring for 4 sec
-[Time: 92.76] Passenger 21 exploring for 2 sec
-[Time: 92.76] Passenger 20 exploring for 3 sec
-[Time: 92.76] Passenger 14 exploring for 3 sec
-[Time: 94.75] Car 3 departing with 5 passengers
-[Time: 94.75] Passenger 23 exploring for 4 sec
-[Time: 94.76] Passenger 16 exploring for 3 sec
-[Time: 94.76] Passenger 17 exploring for 3 sec
-[Time: 94.76] Passenger 38 completed first ride
-[Time: 94.76] Passenger 38 exploring for 4 sec
-[Time: 94.76] Passenger 31 exploring for 3 sec
-[Time: 94.76] Passenger 21 is getting ticket
-
-[Monitor] State at 95.28 sec
-Ticket Queue: [P26 P12 P4 P2 P29 P7 P3 P34 P35 P5 P9 P27 P21 ]
-Ride Queue: [P26 P12 P4 P2 P29 P7 P3 P34 P35 P5 P9 P27 P21 ]
-Car 1: RIDING (5/5)
-Car 2: RIDING (5/5)
-Car 3: RIDING (5/5)
-Passengers: 12 exploring | 13 in queues | 15 riding
-
-[Time: 95.74] Passenger 28 is getting ticket
-[Time: 95.74] Passenger 36 is getting ticket
-[Time: 95.75] Passenger 8 is getting ticket
-[Time: 95.75] Passenger 22 is getting ticket
-[Time: 95.76] Passenger 20 is getting ticket
-[Time: 95.76] Passenger 14 is getting ticket
-[Time: 96.76] Passenger 37 is getting ticket
-[Time: 97.76] Passenger 16 is getting ticket
-[Time: 97.76] Passenger 17 is getting ticket
-[Time: 97.76] Passenger 31 is getting ticket
-[Time: 98.73] Car 2 departing with 5 passengers
-[Time: 98.73] Passenger 32 exploring for 2 sec
-[Time: 98.74] Passenger 18 exploring for 4 sec
-[Time: 98.74] Passenger 19 exploring for 2 sec
-[Time: 98.73] Passenger 15 exploring for 3 sec
-[Time: 98.73] Passenger 30 exploring for 2 sec
-[Time: 98.75] Passenger 23 is getting ticket
-[Time: 98.76] Passenger 38 is getting ticket
-
-[Monitor] State at 100.28 sec
-Ticket Queue: [P7 P3 P34 P35 P5 P9 P27 P21 P28 P36 P8 P22 P20 P14 P37 P16 P17 P31 P23 P38 ]
-Ride Queue: [P7 P3 P34 P35 P5 P9 P27 P21 P28 P36 P8 P22 P20 P14 P37 P16 P17 P31 P23 P38 ]
+[Monitor] System State at 90.28 seconds
+Ticket Queue: [P18 P23 P39 P24 P19 P25 P31 P32 P40 P5 P11 P33 P12 P26 P21 P35 P27 P13 P34 P2 ]
+Ride Queue: [P18 P23 P39 P24 P19 P25 P31 P32 P40 P5 P11 P33 P12 P26 P21 P35 P27 P13 P34 P2 ]
 Car 1: RIDING (5/5)
 Car 2: RIDING (5/5)
 Car 3: RIDING (5/5)
 Passengers: 5 exploring | 20 in queues | 15 riding
+[Time: 92.36] Car 1 departing with 5 passengers
+[Time: 92.38] Passenger 36 completed first ride
+[Time: 92.38] Passenger 36 exploring for 3 sec
+[Time: 92.38] Passenger 15 exploring for 5 sec
+[Time: 92.38] Passenger 10 exploring for 5 sec
+[Time: 92.38] Passenger 29 exploring for 3 sec
+[Time: 92.38] Passenger 14 exploring for 5 sec
+[Time: 92.66] Car 3 departing with 5 passengers
+[Time: 92.67] Passenger 38 completed first ride
+[Time: 92.67] Passenger 38 exploring for 3 sec
+[Time: 92.67] Passenger 30 exploring for 2 sec
+[Time: 92.67] Passenger 6 exploring for 5 sec
+[Time: 92.68] Passenger 4 exploring for 3 sec
+[Time: 92.68] Passenger 3 exploring for 3 sec
 
-[Time: 100.74] Passenger 32 is getting ticket
-[Time: 100.74] Passenger 19 is getting ticket
-[Time: 100.75] Car 1 departing with 5 passengers
-[Time: 100.75] Passenger 30 is getting ticket
-[Time: 100.75] Passenger 10 exploring for 2 sec
-[Time: 100.75] Passenger 1 exploring for 3 sec
-[Time: 100.75] Passenger 39 completed first ride
-[Time: 100.75] Passenger 39 exploring for 4 sec
-[Time: 100.75] Passenger 40 completed first ride
-[Time: 101.74] Passenger 15 is getting ticket
-[Time: 102.74] Passenger 18 is getting ticket
-[Time: 102.75] Passenger 10 is getting ticket
-[Time: 102.75] Car 3 departing with 5 passengers
-[Time: 103.75] Passenger 1 is getting ticket
-[Time: 104.76] Passenger 39 is getting ticket
-
-[Monitor] State at 105.29 sec
-Ticket Queue: [P8 P22 P20 P14 P37 P16 P17 P31 P23 P38 P32 P19 P30 P15 P18 P10 P1 P39 ]
-Ride Queue: [P8 P22 P20 P14 P37 P16 P17 P31 P23 P38 P32 P19 P30 P15 P18 P10 P1 P39 ]
+[Monitor] System State at 95.28 seconds
+Ticket Queue: [P11 P33 P12 P26 P21 P35 P27 P13 P34 P2 P7 P8 P20 P28 P1 P30 ]
+Ride Queue: [P11 P33 P12 P26 P21 P35 P27 P13 P34 P2 P7 P8 P20 P28 P1 P30 ]
 Car 1: RIDING (5/5)
 Car 2: RIDING (5/5)
 Car 3: RIDING (5/5)
-Passengers: 0 exploring | 18 in queues | 15 riding
+Passengers: 9 exploring | 16 in queues | 15 riding
+[Time: 97.35] Car 2 departing with 5 passengers
+[Time: 97.36] Passenger 17 exploring for 4 sec
+[Time: 97.37] Passenger 37 completed first ride
+[Time: 97.37] Passenger 37 exploring for 2 sec
+[Time: 97.37] Passenger 16 exploring for 2 sec
+[Time: 97.37] Passenger 9 exploring for 2 sec
+[Time: 97.37] Passenger 22 exploring for 4 sec
 
-[Time: 106.73] Car 2 departing with 5 passengers
-[Time: 108.75] Car 1 departing with 5 passengers
-[Time: 110.75] Car 3 departing with 5 passengers
-[Time: 114.73] Car 2 departing with 3 passengers
+[Monitor] System State at 100.28 seconds
+Ticket Queue: [P35 P27 P13 P34 P2 P7 P8 P20 P28 P1 P30 P36 P29 P38 P4 P3 P15 P10 P14 P6 P37 P16 P9 ]
+Ride Queue: [P35 P27 P13 P34 P2 P7 P8 P20 P28 P1 P30 P36 P29 P38 P4 P3 P15 P10 P14 P6 P37 P16 P9 ]
+Car 1: RIDING (5/5)
+Car 2: RIDING (5/5)
+Car 3: RIDING (5/5)
+Passengers: 2 exploring | 23 in queues | 15 riding
+[Time: 100.36] Car 1 departing with 5 passengers
+[Time: 100.38] Passenger 18 exploring for 4 sec
+[Time: 100.38] Passenger 23 exploring for 4 sec
+[Time: 100.38] Passenger 19 exploring for 5 sec
+[Time: 100.38] Passenger 39 completed first ride
+[Time: 100.39] Passenger 39 exploring for 2 sec
+[Time: 100.39] Passenger 24 exploring for 4 sec
+[Time: 100.66] Car 3 departing with 5 passengers
+[Time: 100.67] Passenger 5 exploring for 5 sec
+[Time: 100.67] Passenger 32 exploring for 2 sec
+[Time: 100.67] Passenger 31 exploring for 4 sec
+[Time: 100.68] Passenger 40 completed first ride
+
+[Monitor] System State at 105.29 seconds
+Ticket Queue: [P30 P36 P29 P38 P4 P3 P15 P10 P14 P6 P37 P16 P9 P17 P22 P39 P32 P18 P23 P24 P31 ]
+Ride Queue: [P30 P36 P29 P38 P4 P3 P15 P10 P14 P6 P37 P16 P9 P17 P22 P39 P32 P18 P23 P24 P31 ]
+Car 1: RIDING (5/5)
+Car 2: RIDING (5/5)
+Car 3: RIDING (5/5)
+Passengers: 2 exploring | 21 in queues | 15 riding
+[Time: 105.35] Car 2 departing with 5 passengers
+[Time: 108.36] Car 1 departing with 5 passengers
+[Time: 108.66] Car 3 departing with 5 passengers
+[Time: 113.35] Car 2 departing with 5 passengers
+[Time: 116.36] Car 1 departing with 3 passengers
 
 [Monitor] FINAL STATISTICS:
-Total simulation time: 123.37 sec
-Total passengers served: 165
-Total rides completed: 37
-Average wait time in ticket queue: 24.62 seconds
-Average wait time in ride queue: 33.00 seconds
-Average car utilization: 89.19% (4.46/5 passengers per ride)
-==1719370== 
-==1719370== HEAP SUMMARY:
-==1719370==     in use at exit: 0 bytes in 0 blocks
-==1719370==   total heap usage: 88 allocs, 88 frees, 20,332 bytes allocated
-==1719370== 
-==1719370== All heap blocks were freed -- no leaks are possible
-==1719370== 
-==1719370== For lists of detected and suppressed errors, rerun with: -s
-==1719370== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+Total simulation time: 134.43 seconds
+Total passengers served: 170 (includes repeats)
+Total rides completed: 43
+Average wait time in ticket queue: 24.02 seconds
+Average wait time in ride queue: 34.00 seconds
+Average car utilization: 79.14% (3.96/5 passengers per ride)
+==3470218== 
+==3470218== HEAP SUMMARY:
+==3470218==     in use at exit: 0 bytes in 0 blocks
+==3470218==   total heap usage: 88 allocs, 88 frees, 20,332 bytes allocated
+==3470218== 
+==3470218== All heap blocks were freed -- no leaks are possible
+==3470218== 
+==3470218== For lists of detected and suppressed errors, rerun with: -s
+==3470218== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

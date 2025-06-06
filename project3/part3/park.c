@@ -1,5 +1,4 @@
-// Duck Park Simulation (Final Version with Enhanced Stats)
-#define _GNU_SOURCE
+// park.c - Final Duck Park Simulation (Part 3) with all fixes
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -27,7 +26,7 @@ typedef struct {
     int onboard_count;
     int rides_completed;
     double utilization_total;
-    int total_passengers;
+    int total_boarded;
 } Car;
 
 typedef struct {
@@ -53,7 +52,7 @@ typedef struct {
     int riding_count;
     int total_rides;
     int served_once;
-    int total_passengers_served;
+    int total_boarded_passengers;
 } SharedState;
 
 // Globals
@@ -69,25 +68,24 @@ Passenger passengers[MAX_PASSENGERS];
 SharedState *shared_state;
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 pthread_cond_t car_ready_cond = PTHREAD_COND_INITIALIZER;
-double program_start;
-int car_loading_now = 0;
 
-// Time utils
+double program_start;
+
+// Time utility
 double now_seconds() {
     struct timeval tv;
     gettimeofday(&tv, NULL);
-    return tv.tv_sec + tv.tv_usec / 1e6;
+    return tv.tv_sec + tv.tv_usec / 1e6 - program_start;
 }
 
 void log_event(const char *fmt, ...) {
-    double rel_time = now_seconds() - program_start;
-    printf("[Time: %.2f] ", rel_time);
     va_list args;
     va_start(args, fmt);
+    printf("[Time: %.2f] ", now_seconds());
     vprintf(fmt, args);
-    va_end(args);
     printf("\n");
     fflush(stdout);
+    va_end(args);
 }
 
 // Queue ops
@@ -104,39 +102,41 @@ int dequeue(Queue *q) {
     return id;
 }
 
-// Monitor
-void *monitor_loop(void *arg) {
+// Monitor thread
+void *monitor_thread(void *arg) {
     while (1) {
         sleep(5);
         pthread_mutex_lock(&mutex);
-
-        printf("\n[Monitor] State at %.2f sec\n", now_seconds() - program_start);
+        printf("\n[Monitor] System State at %.2f seconds\n", now_seconds());
         printf("Ticket Queue: [");
         for (int i = 0; i < shared_state->ticket_queue.count; ++i)
             printf("P%d ", shared_state->ticket_queue.ids[i] + 1);
-        printf("]\nRide Queue: [");
+        printf("]\n");
+
+        printf("Ride Queue: [");
         for (int i = 0; i < shared_state->ride_queue.count; ++i)
             printf("P%d ", shared_state->ride_queue.ids[i] + 1);
         printf("]\n");
 
         for (int i = 0; i < n_cars; ++i) {
             Car *c = &shared_state->cars[i];
-            const char *status = (c->status == IDLE ? "IDLE" :
-                                  c->status == LOADING ? "LOADING" :
-                                  c->status == RIDING ? "RIDING" : "UNLOADING");
+            const char *status =
+                (c->status == IDLE) ? "IDLE" :
+                (c->status == LOADING) ? "LOADING" :
+                (c->status == RIDING) ? "RIDING" : "UNLOADING";
             printf("Car %d: %s (%d/%d)\n", i + 1, status, c->onboard_count, car_capacity);
         }
 
-        printf("Passengers: %d exploring | %d in queues | %d riding\n\n",
+        printf("Passengers: %d exploring | %d in queues | %d riding\n",
                shared_state->exploring_count,
                shared_state->queueing_count,
                shared_state->riding_count);
 
-        if (shared_state->served_once >= n_passengers)
-        {
+        if (shared_state->served_once >= n_passengers) {
             pthread_mutex_unlock(&mutex);
             break;
         }
+
         pthread_mutex_unlock(&mutex);
     }
     return NULL;
@@ -144,70 +144,74 @@ void *monitor_loop(void *arg) {
 
 // Passenger thread
 void *passenger_thread(void *arg) {
-    int id = *((int *)arg);
+    int id = *(int *)arg;
     free(arg);
     passengers[id].id = id;
 
     while (1) {
+        int explore_time = (rand() % (explore_max - explore_min + 1)) + explore_min;
         pthread_mutex_lock(&mutex);
         shared_state->exploring_count++;
         pthread_mutex_unlock(&mutex);
 
-        int explore_time = (rand() % (explore_max - explore_min + 1)) + explore_min;
         log_event("Passenger %d exploring for %d sec", id + 1, explore_time);
         sleep(explore_time);
 
         double ticket_start = now_seconds();
+
         pthread_mutex_lock(&mutex);
         shared_state->exploring_count--;
         enqueue(&shared_state->ticket_queue, id);
         enqueue(&shared_state->ride_queue, id);
         shared_state->queueing_count++;
-        log_event("Passenger %d is getting ticket", id + 1);
-
-        if (shared_state->ride_queue.count >= car_capacity && car_loading_now == 0) {
-            car_loading_now = 1;
-            pthread_cond_broadcast(&car_ready_cond);
-        }
+        pthread_cond_signal(&car_ready_cond);
         pthread_mutex_unlock(&mutex);
 
-        while (1) {
-            int onboard = 0;
+        // Wait until onboard
+        int onboarded = 0;
+        while (!onboarded) {
             pthread_mutex_lock(&mutex);
             for (int i = 0; i < n_cars; ++i) {
-                Car *c = &shared_state->cars[i];
-                for (int j = 0; j < c->onboard_count; ++j)
-                    if (c->onboard[j] == id) onboard = 1;
+                for (int j = 0; j < shared_state->cars[i].onboard_count; ++j) {
+                    if (shared_state->cars[i].onboard[j] == id) {
+                        onboarded = 1;
+                        break;
+                    }
+                }
+                if (onboarded) break;
             }
             pthread_mutex_unlock(&mutex);
-            if (onboard) break;
             usleep(10000);
         }
 
-        pthread_mutex_lock(&mutex);
         double ride_start = now_seconds();
         passengers[id].ticket_wait_time += (ride_start - ticket_start);
-        pthread_mutex_unlock(&mutex);
 
-        while (1) {
-            int still_on = 0;
+        // Wait until unboarded
+        int riding = 1;
+        while (riding) {
             pthread_mutex_lock(&mutex);
+            riding = 0;
             for (int i = 0; i < n_cars; ++i) {
-                Car *c = &shared_state->cars[i];
-                for (int j = 0; j < c->onboard_count; ++j)
-                    if (c->onboard[j] == id) still_on = 1;
+                for (int j = 0; j < shared_state->cars[i].onboard_count; ++j) {
+                    if (shared_state->cars[i].onboard[j] == id) {
+                        riding = 1;
+                        break;
+                    }
+                }
+                if (riding) break;
             }
             pthread_mutex_unlock(&mutex);
-            if (!still_on) break;
             usleep(10000);
         }
 
-        pthread_mutex_lock(&mutex);
         double ride_end = now_seconds();
         passengers[id].ride_wait_time += (ride_end - ride_start);
         passengers[id].total_rides++;
+
+        pthread_mutex_lock(&mutex);
         shared_state->riding_count--;
-        shared_state->total_passengers_served++;
+        shared_state->total_boarded_passengers++;
         if (!passengers[id].has_ridden) {
             passengers[id].has_ridden = 1;
             shared_state->served_once++;
@@ -215,14 +219,15 @@ void *passenger_thread(void *arg) {
         }
         pthread_mutex_unlock(&mutex);
 
-        if (shared_state->served_once >= n_passengers) break;
+        if (shared_state->served_once >= n_passengers)
+            break;
     }
     return NULL;
 }
 
 // Car thread
 void *car_thread(void *arg) {
-    int id = *((int *)arg);
+    int id = *(int *)arg;
     free(arg);
     Car *car = &shared_state->cars[id];
     car->id = id;
@@ -233,11 +238,9 @@ void *car_thread(void *arg) {
         clock_gettime(CLOCK_REALTIME, &ts);
         ts.tv_sec += wait_time;
 
-        while (shared_state->ride_queue.count < car_capacity &&
-               shared_state->served_once < n_passengers)
-        {
-            if (pthread_cond_timedwait(&car_ready_cond, &mutex, &ts) == ETIMEDOUT)
-                break;
+        car->status = IDLE;
+        while (shared_state->ride_queue.count < car_capacity && shared_state->ride_queue.count == 0) {
+            if (pthread_cond_timedwait(&car_ready_cond, &mutex, &ts) == ETIMEDOUT) break;
         }
 
         if (shared_state->ride_queue.count == 0 &&
@@ -254,55 +257,56 @@ void *car_thread(void *arg) {
             car->onboard[car->onboard_count++] = pid;
             shared_state->queueing_count--;
             shared_state->riding_count++;
+            car->total_boarded++;
         }
-        log_event("Car %d departing with %d passengers", id + 1, car->onboard_count);
-        car->status = RIDING;
-        pthread_mutex_unlock(&mutex);
 
-        sleep(ride_duration);
+        if (car->onboard_count > 0) {
+            car->status = RIDING;
+            log_event("Car %d departing with %d passengers", id + 1, car->onboard_count);
+            pthread_mutex_unlock(&mutex);
 
-        pthread_mutex_lock(&mutex);
-        car->status = UNLOADING;
-        car->rides_completed++;
-        car->utilization_total += car->onboard_count;
-        shared_state->total_rides++;
-        car->onboard_count = 0;
-        car->status = IDLE;
-        car_loading_now = 0;
-        pthread_cond_broadcast(&car_ready_cond);
+            sleep(ride_duration);
+
+            pthread_mutex_lock(&mutex);
+            car->status = UNLOADING;
+            car->rides_completed++;
+            car->utilization_total += car->onboard_count;
+            car->onboard_count = 0;
+            shared_state->total_rides++;
+        }
+
         pthread_mutex_unlock(&mutex);
     }
     return NULL;
 }
 
-// Args
-void print_help() {
-    printf("Usage: ./park [-n passengers] [-c cars] [-p capacity] [-w wait] [-r ride] [-e min:max]\n");
-}
-
+// Arg parsing
 void parse_args(int argc, char *argv[]) {
     int opt;
-    while ((opt = getopt(argc, argv, "n:c:p:w:r:e:h")) != -1) {
+    while ((opt = getopt(argc, argv, "n:c:p:w:r:x:y:")) != -1) {
         switch (opt) {
             case 'n': n_passengers = atoi(optarg); break;
             case 'c': n_cars = atoi(optarg); break;
             case 'p': car_capacity = atoi(optarg); break;
             case 'w': wait_time = atoi(optarg); break;
             case 'r': ride_duration = atoi(optarg); break;
-            case 'e': sscanf(optarg, "%d:%d", &explore_min, &explore_max); break;
-            case 'h': print_help(); exit(0);
+            case 'x': explore_min = atoi(optarg); break;
+            case 'y': explore_max = atoi(optarg); break;
         }
     }
 }
 
-// Main
 int main(int argc, char *argv[]) {
     srand(time(NULL));
     parse_args(argc, argv);
 
     printf("===== DUCK PARK SIMULATION =====\n[Monitor] Simulation started with parameters:\n");
-    printf("- Number of passenger threads: %d\n- Number of cars: %d\n- Capacity per car: %d\n", n_passengers, n_cars, car_capacity);
-    printf("- Park exploration time: %d–%d seconds\n- Car waiting period: %d seconds\n- Ride duration: %d seconds\n", explore_min, explore_max, wait_time, ride_duration);
+    printf("- Number of passenger threads: %d\n", n_passengers);
+    printf("- Number of cars: %d\n", n_cars);
+    printf("- Capacity per car: %d\n", car_capacity);
+    printf("- Park exploration time: %d-%d seconds\n", explore_min, explore_max);
+    printf("- Car waiting period: %d seconds\n", wait_time);
+    printf("- Ride duration: %d seconds\n", ride_duration);
 
     int fd = shm_open("/duckpark", O_CREAT | O_RDWR, 0666);
     ftruncate(fd, sizeof(SharedState));
@@ -310,46 +314,54 @@ int main(int argc, char *argv[]) {
     memset(shared_state, 0, sizeof(SharedState));
     shared_state->total_passengers = n_passengers;
 
-    pthread_t pt[MAX_PASSENGERS], ct[MAX_CARS], mon;
-    program_start = now_seconds();
-    pthread_create(&mon, NULL, monitor_loop, NULL);
+    program_start = now_seconds() + program_start;
+
+    pthread_t car_threads[MAX_CARS], passenger_threads[MAX_PASSENGERS], monitor;
+    pthread_create(&monitor, NULL, monitor_thread, NULL);
 
     for (int i = 0; i < n_cars; ++i) {
-        int *id = malloc(sizeof(int)); *id = i;
-        pthread_create(&ct[i], NULL, car_thread, id);
+        int *cid = malloc(sizeof(int)); *cid = i;
+        pthread_create(&car_threads[i], NULL, car_thread, cid);
     }
 
     for (int i = 0; i < n_passengers; ++i) {
-        int *id = malloc(sizeof(int)); *id = i;
-        pthread_create(&pt[i], NULL, passenger_thread, id);
-        sleep(2);
+        int *pid = malloc(sizeof(int)); *pid = i;
+        pthread_create(&passenger_threads[i], NULL, passenger_thread, pid);
+        sleep(2); // staggered entry
     }
 
-    for (int i = 0; i < n_passengers; ++i) pthread_join(pt[i], NULL);
-    for (int i = 0; i < n_cars; ++i) pthread_join(ct[i], NULL);
-    pthread_join(mon, NULL);
+    for (int i = 0; i < n_passengers; ++i) pthread_join(passenger_threads[i], NULL);
+    for (int i = 0; i < n_cars; ++i) pthread_join(car_threads[i], NULL);
+    pthread_join(monitor, NULL);
 
-    // Final stats
-    double elapsed = now_seconds() - program_start;
-    double ticket_sum = 0, ride_sum = 0;
+    double total_time = now_seconds();
+    double total_ticket = 0, total_ride = 0;
     for (int i = 0; i < n_passengers; ++i) {
-        ticket_sum += passengers[i].ticket_wait_time;
-        ride_sum += passengers[i].ride_wait_time;
+        total_ticket += passengers[i].ticket_wait_time;
+        total_ride += passengers[i].ride_wait_time;
     }
 
-    // Calculate correct stats
-    double avg_passengers_per_ride = (double)shared_state->total_passengers_served / shared_state->total_rides;
-    double utilization_percentage = (avg_passengers_per_ride / car_capacity) * 100;
+    double avg_ticket = total_ticket / n_passengers;
+    double avg_ride = total_ride / n_passengers;
+
+    double total_util = 0;
+    for (int i = 0; i < n_cars; ++i) {
+        if (shared_state->cars[i].rides_completed > 0)
+            total_util += shared_state->cars[i].utilization_total /
+                          shared_state->cars[i].rides_completed;
+    }
+
+    double avg_util = total_util / n_cars;
+    double util_percent = (avg_util / car_capacity) * 100;
 
     printf("\n[Monitor] FINAL STATISTICS:\n");
-    printf("Total simulation time: %.2f sec\n", elapsed);  
-    printf("Total passengers served: %d\n", shared_state->total_passengers_served);
+    printf("Total simulation time: %.2f seconds\n", total_time);
+    printf("Total passengers served: %d (includes repeats)\n", shared_state->total_boarded_passengers);
     printf("Total rides completed: %d\n", shared_state->total_rides);
-    printf("Average wait time in ticket queue: %.2f seconds\n", ticket_sum / n_passengers);
-    printf("Average wait time in ride queue: %.2f seconds\n", ride_sum / n_passengers);
+    printf("Average wait time in ticket queue: %.2f seconds\n", avg_ticket);
+    printf("Average wait time in ride queue: %.2f seconds\n", avg_ride);
     printf("Average car utilization: %.2f%% (%.2f/%d passengers per ride)\n",
-       utilization_percentage, avg_passengers_per_ride, car_capacity);
-
+           util_percent, avg_util, car_capacity);
 
     shm_unlink("/duckpark");
     return 0;
